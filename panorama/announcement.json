@@ -1,0 +1,20 @@
+[
+  {
+    "headline": "Introduction to JavaScript: Basics",
+    "date": "2020-06-17T09:16:00",
+    "content": "1.html"
+  },
+
+  {
+    "headline": "Introduction to PHP",
+    "date": "2020-05-17T09:16:00",
+    "content": "2.html"
+  },
+
+  {
+    "headline": "Introduction to 3D GIS",
+    "date": "2020-04-17T09:16:00",
+    "content": "3.html"
+  }
+
+]
