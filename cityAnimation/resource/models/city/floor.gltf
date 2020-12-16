@@ -1,0 +1,190 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v0.9.36",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "floor"
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "floor_mesh",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0
+                    },
+                    "indices" : 1
+                },
+                {
+                    "attributes" : {
+                        "POSITION" : 2
+                    },
+                    "indices" : 3
+                },
+                {
+                    "attributes" : {
+                        "POSITION" : 4
+                    },
+                    "indices" : 5
+                },
+                {
+                    "attributes" : {
+                        "POSITION" : 6
+                    },
+                    "indices" : 7
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 65535,
+            "max" : [
+                91.84484100341797,
+                8.70962142944336,
+                103.62764739990234
+            ],
+            "min" : [
+                -103.73468017578125,
+                -1.7070297002792358,
+                -120.23419952392578
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5123,
+            "count" : 377037,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 65535,
+            "max" : [
+                99.9939956665039,
+                9.88943862915039,
+                52.81532669067383
+            ],
+            "min" : [
+                -119.55360412597656,
+                -1.7070176601409912,
+                -110.64696502685547
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 378330,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5126,
+            "count" : 24416,
+            "max" : [
+                98.0765380859375,
+                10.8907470703125,
+                -10.460396766662598
+            ],
+            "min" : [
+                -119.07424926757812,
+                -1.7070026397705078,
+                -89.55506134033203
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5123,
+            "count" : 139200,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 10241,
+            "max" : [
+                98.0765380859375,
+                10.8907470703125,
+                53.29468536376953
+            ],
+            "min" : [
+                -119.07424926757812,
+                -1.7070177793502808,
+                -110.64696502685547
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5123,
+            "count" : 31689,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 786420,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 754074,
+            "byteOffset" : 786420
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 786420,
+            "byteOffset" : 1540496
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 756660,
+            "byteOffset" : 2326916
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 292992,
+            "byteOffset" : 3083576
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 278400,
+            "byteOffset" : 3376568
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 122892,
+            "byteOffset" : 3654968
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 63378,
+            "byteOffset" : 3777860
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 3841240,
+            "uri" : "floor.bin"
+        }
+    ]
+}

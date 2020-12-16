@@ -1,0 +1,17 @@
+Objectives:
+Start developing perspective view, lighting and shading in WebGL Applications
+Try to interact the lighting and objects in the web app
+Learning camera view, lighting, transformations of WebGL implementation
+
+Things to do:
+Create a bigger canvas to allow users to create cubes and spheres from HTML UIs.
+Use perspective view.
+Create a white point light to the environment.
+By default, the environment should have two spheres, one is using vertex lighting shadier, the other is using fragment lighting shadier.
+For the new cubes and spheres, you can choose use only one lighting shadier.
+Allow the users to determine where the new cube or sphere will be before creating
+Any created cubes or spheres need to be randomly assigned a rotation direction x or y or z, which means they are rotating along one axis after showing on the screen.
+Allow users to create cones too.
+Allow users to move the light source around.
+Allow users to manipulate the two-default sphere (translate, rotate and scale in 3D)
+Allow users to change the color of the light.

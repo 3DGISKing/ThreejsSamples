@@ -1,0 +1,17 @@
+Objectives
+
+Start using WebGL
+Try to draw some simple 2D graphics
+Build up confidence!
+Things to do
+
+Draw a tessellated triangle in both wireframe and solid color modes. Make sure you can change your tesselation grade at least from your code.
+Rotate the tesselated triangle by the following formula.
+
+Here are the examples:
+
+
+Submit Instructions
+
+Please zip your project files and submit zip file through Kennesaw State University D2L Dropbox.
+It is nice to include any readme file or instructions about your submission.

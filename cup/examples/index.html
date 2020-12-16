@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Three js Cup</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+<div id = "ui">
+    <input id="userImage" type="file" accept=".png,.jpg"/> <br/>
+    <input type="checkbox" id="white-carton" name="white-carton" value="White" checked>
+    <label for="white-carton"> White / Carton</label> <br/>
+
+    <label for="lid-color">Lid Color:</label>
+
+    <select name="lid-color" id="lid-color">
+        <option value="None">Normal</option>
+        <option value="Black">Black</option>
+        <option value="White">White</option>
+    </select>
+
+    <br/>
+
+    <button id="capture" type="button">Capture</button>
+</div>
+
+<div id = "param" image="image/black.png" lid_option="White" paper_material="White">
+
+</div>
+
+<script src="app.js" type="module"></script>
+
+</body>
+</html>

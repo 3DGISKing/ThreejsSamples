@@ -1,0 +1,20 @@
+Hello, I recently received 3D model from designer, which is in .glTF format (exported from Blender with Khronos exporter).
+There is also a .bin assets file coming with this .glTF file.
+The problem is - when I upload this model in my code it looks quite different from what I see in Online glTF viewer, see: https://gltf-viewer.donmccurdy.com/
+Also with model comes only one 8s animation which is accessible via glft.animations[0]
+
+I cant get it work, although in online viewer it seems to be working fine.
+
+I'm attaching an error that I get.
+
+The third thing - I need to make this model rotating around self (x/y rotation). But when I try to call gltf.scene.rotation/x/y - it not only rotates but also moves around Orbit, I do not need that movement, just rotation in place.
+
+So three things:
+
+1) Making 3D model in Three.JS code as much similar as in 3D viewer.
+
+2) Trying to get animation working.
+
+3) Rotation solution.
+
+ATTENTION! I'm attaching model - when using with online viewer - please drag ENTIRE folder, not separate files.

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Mesh simulation</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<body>	
+<script src="three.js"></script>
+<script src="mesh_fabric.js"></script>
+<script src="OrbitControls.js"></script>
+
+<script>	
+	pins = [0, 10, 120, 110];
+
+	position = [
+		new THREE.Vector3( -200, 200, 0 ),
+		new THREE.Vector3(200, 200, 100 ),
+		new THREE.Vector3( 200, -200, 0 ),
+		new THREE.Vector3(-200, -200, 100 )
+	];
+
+	var container;
+	var camera, scene, renderer, clothGeometry, object;
+    var newMaterial = null;
+
+	init();
+	animate();
+
+	function init() {
+		container = document.createElement('div');
+		document.body.appendChild(container);
+
+		scene = new THREE.Scene();
+		scene.background = new THREE.Color( 0xFFFFFF );
+
+		camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
+		camera.position.set(900, 800, 100);
+		camera.lookAt(0, 45, 0);
+
+		var material = new THREE.MeshBasicMaterial({color: 0x000000, side: THREE.DoubleSide, wireframe: true});
+
+		clothGeometry = new THREE.ParametricGeometry(clothFunction, cloth.w, cloth.h);
+		object = new THREE.Mesh(clothGeometry, material);
+
+		object.rotation.x = -1.57;
+
+		scene.add( object );
+
+		renderer = new THREE.WebGLRenderer({antialias: true});
+		renderer.setPixelRatio(window.devicePixelRatio);
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		container.appendChild(renderer.domElement);
+
+		var controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+		controls.maxPolarAngle = Math.PI * 1.5;
+		window.addEventListener('resize', onWindowResize, false);
+
+		// instantiate a loader
+		var loader = new THREE.TextureLoader();
+
+		// load a resource
+		loader.load(
+			// resource URL
+			'./gawe.jpg',
+
+			// onLoad callback
+			function ( texture ) {
+				// in this example we create the material when the texture is loaded
+                newMaterial = new THREE.MeshBasicMaterial( {
+					map: texture
+				} );
+
+                newMaterial.map = texture;
+                newMaterial.side = THREE.DoubleSide;
+
+                object.material = newMaterial;
+			},
+
+			// onProgress callback currently not supported
+			undefined,
+
+			// onError callback
+			function ( err ) {
+				console.error('An error happened.');
+			}
+		);
+	}
+
+	function onWindowResize() {
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+		renderer.setSize( window.innerWidth, window.innerHeight );
+	}
+
+	function animate() {
+		requestAnimationFrame(animate);
+
+		var time = Date.now();
+
+		simulate(time);
+		render();
+	}
+
+	function render() {
+        var p = cloth.particles;
+
+		for ( var i = 0; i < p.length; i ++) {
+			clothGeometry.vertices[ i ].copy( p[i].position );
+
+			object.rotation.z += -0.00009;
+		}
+
+		clothGeometry.verticesNeedUpdate = true;
+		renderer.render(scene, camera);
+	}
+
+</script>
+
+</body></html>

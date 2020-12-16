@@ -1,0 +1,76 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v0.9.36",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "sky"
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "sky_mesh",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0
+                    },
+                    "indices" : 1
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 11825,
+            "max" : [
+                79.00469207763672,
+                11.136303901672363,
+                78.06079864501953
+            ],
+            "min" : [
+                -77.05198669433594,
+                11.136299133300781,
+                -77.99588012695312
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5123,
+            "count" : 58806,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 141900,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 117612,
+            "byteOffset" : 141900
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 259512,
+            "uri" : "sky.bin"
+        }
+    ]
+}

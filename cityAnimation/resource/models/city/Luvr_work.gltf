@@ -1,0 +1,100 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v0.9.36",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Building"
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Building",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 28863,
+            "max" : [
+                27.27861976623535,
+                8.00806713104248,
+                26.335533142089844
+            ],
+            "min" : [
+                -26.13381004333496,
+                -0.12379681318998337,
+                -43.90301513671875
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 28863,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 28863,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 50574,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 346356,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 346356,
+            "byteOffset" : 346356
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 230904,
+            "byteOffset" : 692712
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 101148,
+            "byteOffset" : 923616
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 1024764,
+            "uri" : "Luvr_work.bin"
+        }
+    ]
+}

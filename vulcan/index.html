@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Vulcanizer3D - Lv.1</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+        <style>
+            body {
+                font-family: Monospace;
+                background-color: #f0f0f0;
+                margin: 0px;
+                overflow: hidden;
+            }
+
+            #oldie {
+                background-color: #ddd !important;
+            }
+
+            #dropdown {
+                width: 200px;
+                background: #222;
+                margin: 20px;
+            }
+
+            #dropdown li {
+                font-family: sans-serif;
+                padding: 3px 10px 3px 30px;
+                color: white;
+                cursor: pointer;
+            }
+            #dropdown li:hover {
+                background-color: blue !important;
+            }
+
+            #dropdown li.checked {
+                background: url(http://cdn1.iconfinder.com/data/icons/fatcow/16x16_0020/accept.png) 0 5px no-repeat;
+            }
+
+            #gui {
+                position: absolute;
+                top: 110px;
+                left: 86.5%;
+            }
+
+            #logo {
+                position: absolute;
+                top: 80px;
+                left: 20px;
+                /* visibility: hidden; */
+            }
+            img {
+                width: 100px;
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="libs/three.min.js"></script>
+        <script src="js/Detector.js"></script>
+        <script src="libs/TrackballControls.js"></script>
+        <script src="js/controls/OrbitControls.js"></script>
+        <script src="js/libs/dat.gui.min.js"></script>
+        <script src="js/loaders/MTLLoader.js"></script>
+        <script src="js/loaders/OBJLoader.js"></script>
+        <script src="app.js"></script>
+
+        <script>
+            var theApp = new App();
+        </script>
+
+        <div id="logo">
+            <img src="logo/logo.jpeg" alt="logo" />
+        </div>
+    </body>
+</html>

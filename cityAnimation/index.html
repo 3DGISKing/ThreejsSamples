@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>City Animation</title>
+</head>
+
+<link rel="stylesheet" href="./resource/css/main.css">
+
+<body class="wrap index" style="position: fixed;">
+
+
+<!--<div id="loading" class="white">-->
+<!--    <div class="mask_img">-->
+<!--        <img src="./resource/img/intro/mask.svg" alt="">-->
+<!--    </div>-->
+<!--    <div class="loading_img">-->
+<!--        <div class="loading_text">-->
+<!--            <img src="./resource/img/intro/txt_blue.svg" alt="">-->
+<!--            <div id="loadingholder"><div class="loadingstyle"></div></div>-->
+<!--        </div>-->
+<!--        <img src="./resource/img/intro/logo.svg" alt="">-->
+<!--    </div>-->
+<!--</div>-->
+
+<div id="webgl"></div>
+<div id="webgl-gui-container" style="position: absolute;bottom: 0px;left: 0px;z-index:9999;"></div>
+<div class="content intro">
+    <nav class="scenes-navigation">
+        <ul>
+            <li>
+                <a href="#"><span>scene1</span></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script>
+    var resourceDomain = "./resource";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery-3.4.1.min.js"></script>
+
+<script src="./js/dat.gui.min.js"></script>
+<script src="./js/tween.umd.js"></script>
+<script src="updateable.js" type="module"></script>
+<script src="webgl.js" type="module"></script>
+<script src="index.js" type="module"></script>
+<script src="common.js"></script>
+
+</body>
+</html>

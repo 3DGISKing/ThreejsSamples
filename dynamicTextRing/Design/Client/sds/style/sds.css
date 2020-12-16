@@ -1,0 +1,183 @@
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-indeX: -1;
+    user-select: none; }
+
+.sds-workbench {
+    max-height: 100vh;
+    overflow: hidden;
+    user-select: none; }
+.sds-workbench .load-progress {
+    position: absolute !important;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%); }
+.sds-workbench .working-indicator {
+    top: -8px !important;
+    /* don't like this hack! */ }
+.sds-workbench .refresh-indicator {
+    width: 220px;
+    height: 220px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%); }
+.sds-workbench .sds-events {
+    position: fixed;
+    width: 70vw;
+    height: 33vh;
+    top: 33vh;
+    left: 15vw;
+    background: transparent;
+    z-index: 100; }
+
+.sidenav {
+    position: absolute;
+    left: 0;
+    top: 74px;
+    width: 22vw !important;
+    max-width: 200px;
+    height: calc(100vh - 74px);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-right: 2px solid #eaeaea;
+    justify-content: space-between; }
+.sidenav .material > div {
+    width: 22vw !important;
+    max-width: 200px; }
+.sidenav .meta {
+    color: #333;
+    display: flex;
+    flex-direction: column; }
+.sidenav .meta .name {
+    /* margin-top: 2vh; */
+    margin: 2vh auto 0 auto;
+    font-weight: 300; }
+.sidenav .meta .price {
+    margin-bottom: 2vh; }
+.sidenav .buy {
+    margin-top: 4vh; }
+.sidenav .back p {
+    margin: 0 auto; }
+.sidenav button {
+    width: 75%; }
+
+.sds-app-bar {
+    align-items: center; }
+.sds-app-bar .app-bar-logo {
+    height: 40px;
+    width: auto; }
+
+.rightnav {
+    position: absolute;
+    right: 3px;
+    top: 0;
+    width: 22vw !important;
+    max-width: 200px;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    text-align: center; }
+.rightnav.hidden {
+    display: none; }
+.rightnav .op-header-title {
+    padding: 8px 8px 0 8px !important; }
+.rightnav .op-header-title > div {
+    padding-right: 0px !important; }
+.rightnav .op-card-header-m {
+    color: #5d5a58;
+    font-size: 14px; }
+
+.leftnav {
+    position: absolute;
+    left: 3px;
+    top: 0;
+    width: 22vw !important;
+    max-width: 200px;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center; }
+.leftnav.hidden {
+    display: none; }
+
+.leftnav .op-card, .rightnav .op-card {
+    margin: 8px 2px; }
+.leftnav .op-card .op-header-title > div, .rightnav .op-card .op-header-title > div {
+    padding-right: 0 !important; }
+.leftnav .op-card .op-header-title-none, .rightnav .op-card .op-header-title-none {
+    padding: 0 !important; }
+.leftnav .op-card .op-menu, .rightnav .op-card .op-menu {
+    top: -7px !important; }
+
+.leftnav button[type=button] span, .rightnav button[type=button] span {
+    text-transform: capitalize !important; }
+
+.mobilebuttons {
+    /* its a bug in materialui which prevents conditional rendering. once it is fixed we should move to it */ }
+.mobilebuttons.hidden {
+    display: none; }
+.mobilebuttons .bottombar {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important; }
+.mobilebuttons .editbtn {
+    position: absolute;
+    top: 50px; }
+.mobilebuttons .editbtn:not(.rtl) {
+    left: 20px; }
+.mobilebuttons .editbtn.rtl {
+    right: 20px; }
+.mobilebuttons .editbtn .button-main {
+    background: #f6d27a !important; }
+.mobilebuttons .editbtn .button-main > a {
+    background: #f6d27a !important; }
+.mobilebuttons .editbtn .button-main > a > div > div > span {
+    font-size: 15px !important; }
+.mobilebuttons .materialmenu {
+    flex: 0 1 auto !important; }
+.mobilebuttons .materialmenu.hidden {
+    display: none !important; }
+.mobilebuttons .savebutton.hidden {
+    display: none !important; }
+.mobilebuttons .zoombuttons {
+    position: absolute;
+    top: 32px;
+    right: 0px; }
+.mobilebuttons.rtl .zoombuttons {
+    right: initial;
+    left: 0px; }
+
+.text-dialog-style {
+    max-width: 450px !important; }
+.text-dialog-style > div > div {
+    padding: 16px 24px 0px 24px !important; }
+
+html.rtl .edit_btn_menu_part span[role=menuitem] svg {
+    transform: rotate(180deg) !important; }
+
+html.rtl .rightnav .op-header-title > div {
+    padding-left: 0 !important; }
+
+@media only screen and (max-width: 660px) {
+    .leftnav, .rightnav {
+        display: none; }
+    .mobilebuttons {
+        display: block; }
+    .text-dialog-style {
+        width: 65%;
+        min-width: 35%; }
+    .text-dialog-style > div > div {
+        max-height: 304px !important; } }
+
+@media only screen and (min-width: 660px) {
+    .leftnav, .rightnav {
+        display: block; }
+    .mobilebuttons {
+        display: none; } }

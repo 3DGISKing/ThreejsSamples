@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: Monospace;
+    font-size: 13px;
+    line-height: 24px;
+    overscroll-behavior: none;
+}
+
+canvas {
+    display: block;
+}
+
+#ui{
+    padding: 10px;
+    border-style: solid;
+    border-color: gray;
+    border-radius: 5px;
+    position: absolute;
+    top : 20px;
+    left : 20px;
+    color: black;
+}
