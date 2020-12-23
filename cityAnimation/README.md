@@ -1,7 +1,5 @@
 http://kr.ncsoft.com/en/index.do
 
-https://github.com/3DGISKing/ThreeJsCityAnimation
-
 # variable explanation
 
 isDebug : if this is true, axis, and gird plane will be shown
