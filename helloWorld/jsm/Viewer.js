@@ -1,7 +1,7 @@
-import * as THREE from '../../external/three.js-r123/build/three.module.js'
-import {OrbitControls} from '../../external/three.js-r123/examples/jsm/controls/OrbitControls.js'
-import {GUI} from "../../external/three.js-r123/libs/dat.gui.module.js";
-import Stats from '../../external/three.js-r123/libs/stats.module.js';
+import * as THREE from '../../lib/three.js-r123/build/three.module.js'
+import {OrbitControls} from '../../lib/three.js-r123/examples/jsm/controls/OrbitControls.js'
+import {GUI} from "../../lib/three.js-r123/examples/jsm/libs/dat.gui.module.js";
+import Stats from '../../lib/three.js-r123/examples/jsm/libs/stats.module.js';
 
 const Vector3 = THREE.Vector3;
 

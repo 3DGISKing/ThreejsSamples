@@ -1,10 +1,10 @@
-import * as THREE from './js/three/build/three.module.js';
-import { EffectComposer } from './js/three/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from './js/three/examples/jsm/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from './js/three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { ShaderPass } from './js/three/examples/jsm/postprocessing/ShaderPass.js';
-import { OrbitControls } from './js/three/examples/jsm/controls/OrbitControls.js';
-import Stats from './js/three/examples/jsm/libs/stats.module.js';
+import * as THREE from '../lib/three.js-r123/build/three.module.js';
+import { EffectComposer } from '../lib/three.js-r123/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from '../lib/three.js-r123/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from '../lib/three.js-r123/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from '../lib/three.js-r123/examples/jsm/postprocessing/ShaderPass.js';
+import { OrbitControls } from '../lib/three.js-r123/examples/jsm/controls/OrbitControls.js';
+import Stats from '../lib/three.js-r123/examples/jsm/libs/stats.module.js';
 
 var vignetteShader = {
     uniforms: {
@@ -51,7 +51,7 @@ window.WebGL = (function () {
                 target: new Vector3(1,0,0),
                 time: 1300,
                 curve: TWEEN.Easing.Linear.None
-            },
+            }
             this.tweenParams = new TWEEN.Tween(this.tweenParamsOptions.origin).to(this.tweenParamsOptions.target, this.tweenParamsOptions.time).easing(this.tweenParamsOptions.curve);
 
         this.useEffectComposer = options.useEffectComposer;

@@ -1,12 +1,12 @@
-import {LoadingManager, FileLoader, TextureLoader, FontLoader, TextGeometry, MeshPhongMaterial} from './js/three/build/three.module.js';
-import {Mesh} from './js/three/build/three.module.js';
-import {PlaneBufferGeometry} from './js/three/build/three.module.js';
-import {Group, MeshBasicMaterial} from './js/three/build/three.module.js';
+import {LoadingManager, FileLoader, TextureLoader, FontLoader, TextGeometry, MeshPhongMaterial} from '../lib/three.js-r123/build/three.module.js';
+import {Mesh} from '../lib/three.js-r123/build/three.module.js';
+import {PlaneBufferGeometry} from '../lib/three.js-r123/build/three.module.js';
+import {Group, MeshBasicMaterial} from '../lib/three.js-r123/build/three.module.js';
 import {Vector3, MeshLambertMaterial, Color,CatmullRomCurve3,
-      BufferGeometry, LineBasicMaterial, BoxBufferGeometry} from './js/three/build/three.module.js';
-import { GLTFLoader } from './js/three/examples/jsm/loaders/GLTFLoader.js';
-import {Line, Vector2} from "./js/three/build/three.module.js";
-import {BufferGeometryUtils} from "./js/three/examples/jsm/utils/BufferGeometryUtils.js";
+      BufferGeometry, LineBasicMaterial, BoxBufferGeometry} from '../lib/three.js-r123/build/three.module.js';
+import { GLTFLoader } from '../lib/three.js-r123/examples/jsm/loaders/GLTFLoader.js';
+import {Line, Vector2} from "../lib/three.js-r123/build/three.module.js";
+import {BufferGeometryUtils} from "../lib/three.js-r123/examples/jsm/utils/BufferGeometryUtils.js";
 
 var isDebug = false;
 var useEffectComposer = true;

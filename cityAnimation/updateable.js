@@ -1,4 +1,4 @@
-import {InstancedBufferGeometry, Vector2, Vector3, Mesh, InstancedBufferAttribute} from './js/three/build/three.module.js';
+import {InstancedBufferGeometry, Vector2, Vector3, Mesh, InstancedBufferAttribute} from '../lib/three.js-r123/build/three.module.js';
 
 window.Updateable = (function () {
     function Updateable(webgl, onShaderCompile) {
