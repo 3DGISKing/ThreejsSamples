@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            color: white;
+        }
+
+        .fullSize {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        #info {
+            position: absolute;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<div id = "threejsContainer" class="fullSize"></div>
+<div id="info">Test Timeline Operations<br/>
+    <a onclick="viewer.initSphereAnimation();">Init Sphere Animation</a> |
+    <a onclick="viewer.initCubeAnimation();">Init Cube Animation</a> |
+    <a onclick="viewer.selectSphere();">Select Sphere</a>
+    <a onclick="viewer.selectCube();">Select Cube</a>
+</div>
+
+<script type="module">
+    import Viewer from "./Viewer.js"
+
+    window.viewer = new Viewer('threejsContainer');
+</script>
+
+</body>
+</html>
