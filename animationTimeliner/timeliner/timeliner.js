@@ -211,7 +211,9 @@ function Timeliner(target) {
 		value = Math.max(0, value);
 		currentTimeStore.value = value;
 
-		if (start_play) start_play = performance.now() - value * 1000;
+		if (start_play)
+			start_play = performance.now() - value * 1000;
+
 		repaintAll();
 		// layer_panel.repaint(s);
 	}

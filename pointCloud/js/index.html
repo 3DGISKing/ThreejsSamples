@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Point Cloud</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .fullSize {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <script src="../../lib/three.js-r101/build/three.js"></script>
+    <script src="../../lib/three.js-r101/examples/js/controls/OrbitControls.js"></script>
+    <script src="../../lib/three.js-r101/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="../../lib/three.js-r101/examples/js/libs/dat.gui.min.js"></script>
+    <script src="../../lib/three.js-r101/examples/js/libs/stats.min.js"></script>
+</head>
+<body>
+<div id = "threejsContainer" class="fullSize">
+</div>
+<script type="module">
+    import Viewer from "./Viewer.js"
+
+    const theViewer = new Viewer('threejsContainer');
+</script>
+
+</body>
+</html>
