@@ -4,8 +4,8 @@ function scaleDiameterManualConnector(e, t, i, a, s) {
             var r = e[o];
             if ("scalar" == t[o].type) {
                 var n = r
-                    , h = new THREE.Vector3(n.position.x,n.position.y,n.position.z)
-                    , c = (new THREE.Vector3(n.rotation.x,n.rotation.y,n.rotation.z),
+                    , h = new THREE.Vector3(n.position.x, n.position.y, n.position.z)
+                    , c = (new THREE.Vector3(n.rotation.x, n.rotation.y, n.rotation.z),
                 (a - s) / 2)
                     , l = h.x
                     , m = h.y
@@ -20,8 +20,8 @@ function scaleDiameterManualConnector(e, t, i, a, s) {
             } else
                 for (var u = 0; u < r.length; u++) {
                     n = r[u],
-                        h = new THREE.Vector3(n.position.x,n.position.y,n.position.z),
-                        new THREE.Vector3(n.rotation.x,n.rotation.y,n.rotation.z),
+                        h = new THREE.Vector3(n.position.x, n.position.y, n.position.z),
+                        new THREE.Vector3(n.rotation.x, n.rotation.y, n.rotation.z),
                         c = (a - s) / 2,
                         l = h.x,
                         m = h.y,
@@ -38,9 +38,9 @@ function scaleDiameterManualConnector(e, t, i, a, s) {
         }
 }
 
-window.ThreeBSP = function() {
+window.ThreeBSP = function () {
     var a;
-    return (a = function(b) {
+    return (a = function (b) {
         var c, d, e, f, g, h, i, j = [];
         if (b instanceof THREE.Geometry) this.matrix = new THREE.Matrix4(); else {
             if (!(b instanceof THREE.Mesh)) {
@@ -67,20 +67,21 @@ window.ThreeBSP = function() {
             (f = new a.Vertex(f.x, f.y, f.z, e.vertexNormals[3], h)).applyMatrix4(this.matrix),
             i.vertices.push(f)), i.calculateProperties(), j.push(i);
         this.tree = new a.Node(j);
-    }).prototype.subtract = function(b) {
+    }).prototype.subtract = function (b) {
         var c = this.tree.clone(), d = b.tree.clone();
         return c.invert(), c.clipTo(d), d.clipTo(c), d.invert(), d.clipTo(c), d.invert(),
             c.build(d.allPolygons()), c.invert(), (c = new a(c)).matrix = this.matrix, c;
-    }, a.prototype.union = function(b) {
+    }, a.prototype.union = function (b) {
         var c = this.tree.clone(), d = b.tree.clone();
         return c.clipTo(d), d.clipTo(c), d.invert(), d.clipTo(c), d.invert(), c.build(d.allPolygons()),
             (c = new a(c)).matrix = this.matrix, c;
-    }, a.prototype.intersect = function(b) {
+    }, a.prototype.intersect = function (b) {
         var c = this.tree.clone(), d = b.tree.clone();
         return c.invert(), d.clipTo(c), d.invert(), c.clipTo(d), d.clipTo(c), c.build(d.allPolygons()),
             c.invert(), (c = new a(c)).matrix = this.matrix, c;
-    }, a.prototype.toGeometry = function() {
-        var a, b, c, d, e, f, g, h, i, j, k = new THREE.Matrix4().getInverse(this.matrix), l = new THREE.Geometry(), m = this.tree.allPolygons(), n = m.length, o = {};
+    }, a.prototype.toGeometry = function () {
+        var a, b, c, d, e, f, g, h, i, j, k = new THREE.Matrix4().getInverse(this.matrix), l = new THREE.Geometry(),
+            m = this.tree.allPolygons(), n = m.length, o = {};
         for (a = 0; a < n; a++) for (d = (c = m[a]).vertices.length, b = 2; b < d; b++) j = [],
             h = c.vertices[0], j.push(new THREE.Vector2(h.uv.x, h.uv.y)), (h = new THREE.Vector3(h.x, h.y, h.z)).applyMatrix4(k),
             void 0 !== o[h.x + "," + h.y + "," + h.z] ? e = o[h.x + "," + h.y + "," + h.z] : (l.vertices.push(h),
@@ -93,32 +94,32 @@ window.ThreeBSP = function() {
                 g = o[h.x + "," + h.y + "," + h.z] = l.vertices.length - 1), i = new THREE.Face3(e, f, g, new THREE.Vector3(c.normal.x, c.normal.y, c.normal.z)),
             l.faces.push(i), l.faceVertexUvs[0].push(j);
         return l;
-    }, a.prototype.toMesh = function(a) {
+    }, a.prototype.toMesh = function (a) {
         var b = this.toGeometry(), c = new THREE.Mesh(b, a);
         return c.position.setFromMatrixPosition(this.matrix), c.rotation.setFromRotationMatrix(this.matrix),
             c;
-    }, a.Polygon = function(a, b, c) {
+    }, a.Polygon = function (a, b, c) {
         a instanceof Array || (a = []), this.vertices = a, a.length > 0 ? this.calculateProperties() : this.normal = this.w = void 0;
-    }, a.Polygon.prototype.calculateProperties = function() {
+    }, a.Polygon.prototype.calculateProperties = function () {
         var a = this.vertices[0], b = this.vertices[1], c = this.vertices[2];
         return this.normal = b.clone().subtract(a).cross(c.clone().subtract(a)).normalize(),
             this.w = this.normal.clone().dot(a), this;
-    }, a.Polygon.prototype.clone = function() {
+    }, a.Polygon.prototype.clone = function () {
         var b, c, d = new a.Polygon();
         for (b = 0, c = this.vertices.length; b < c; b++) d.vertices.push(this.vertices[b].clone());
         return d.calculateProperties(), d;
-    }, a.Polygon.prototype.flip = function() {
+    }, a.Polygon.prototype.flip = function () {
         var a, b = [];
         for (this.normal.multiplyScalar(-1), this.w *= -1, a = this.vertices.length - 1; a >= 0; a--) b.push(this.vertices[a]);
         return this.vertices = b, this;
-    }, a.Polygon.prototype.classifyVertex = function(a) {
+    }, a.Polygon.prototype.classifyVertex = function (a) {
         var b = this.normal.dot(a) - this.w;
         return b < -1e-5 ? 2 : b > 1e-5 ? 1 : 0;
-    }, a.Polygon.prototype.classifySide = function(a) {
+    }, a.Polygon.prototype.classifySide = function (a) {
         var b, c, d, e = 0, f = 0, g = a.vertices.length;
         for (b = 0; b < g; b++) c = a.vertices[b], 1 === (d = this.classifyVertex(c)) ? e++ : 2 === d && f++;
         return e > 0 && 0 === f ? 1 : 0 === e && f > 0 ? 2 : 0 === e && 0 === f ? 0 : 3;
-    }, a.Polygon.prototype.splitPolygon = function(b, c, d, e, f) {
+    }, a.Polygon.prototype.splitPolygon = function (b, c, d, e, f) {
         var g = this.classifySide(b);
         if (0 === g) (this.normal.dot(b.normal) > 0 ? c : d).push(b); else if (1 === g) e.push(b); else if (2 === g) f.push(b); else {
             var h, i, j, k, l, m, n, o, p, q = [], r = [];
@@ -128,71 +129,71 @@ window.ThreeBSP = function() {
                 p = m.interpolate(n, o), q.push(p), r.push(p));
             q.length >= 3 && e.push(new a.Polygon(q).calculateProperties()), r.length >= 3 && f.push(new a.Polygon(r).calculateProperties());
         }
-    }, a.Vertex = function(a, b, c, d, e) {
+    }, a.Vertex = function (a, b, c, d, e) {
         this.x = a, this.y = b, this.z = c, this.normal = d || new THREE.Vector3(), this.uv = e || new THREE.Vector2();
-    }, a.Vertex.prototype.clone = function() {
+    }, a.Vertex.prototype.clone = function () {
         return new a.Vertex(this.x, this.y, this.z, this.normal.clone(), this.uv.clone());
-    }, a.Vertex.prototype.add = function(a) {
+    }, a.Vertex.prototype.add = function (a) {
         return this.x += a.x, this.y += a.y, this.z += a.z, this;
-    }, a.Vertex.prototype.subtract = function(a) {
+    }, a.Vertex.prototype.subtract = function (a) {
         return this.x -= a.x, this.y -= a.y, this.z -= a.z, this;
-    }, a.Vertex.prototype.multiplyScalar = function(a) {
+    }, a.Vertex.prototype.multiplyScalar = function (a) {
         return this.x *= a, this.y *= a, this.z *= a, this;
-    }, a.Vertex.prototype.cross = function(a) {
+    }, a.Vertex.prototype.cross = function (a) {
         var b = this.x, c = this.y, d = this.z;
         return this.x = c * a.z - d * a.y, this.y = d * a.x - b * a.z, this.z = b * a.y - c * a.x,
             this;
-    }, a.Vertex.prototype.normalize = function() {
+    }, a.Vertex.prototype.normalize = function () {
         var a = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
         return this.x /= a, this.y /= a, this.z /= a, this;
-    }, a.Vertex.prototype.dot = function(a) {
+    }, a.Vertex.prototype.dot = function (a) {
         return this.x * a.x + this.y * a.y + this.z * a.z;
-    }, a.Vertex.prototype.lerp = function(a, b) {
+    }, a.Vertex.prototype.lerp = function (a, b) {
         return this.add(a.clone().subtract(this).multiplyScalar(b)), this.normal.add(a.normal.clone().sub(this.normal).multiplyScalar(b)),
             this.uv.add(a.uv.clone().sub(this.uv).multiplyScalar(b)), this;
-    }, a.Vertex.prototype.interpolate = function(a, b) {
+    }, a.Vertex.prototype.interpolate = function (a, b) {
         return this.clone().lerp(a, b);
-    }, a.Vertex.prototype.applyMatrix4 = function(a) {
+    }, a.Vertex.prototype.applyMatrix4 = function (a) {
         var b = this.x, c = this.y, d = this.z, e = a.elements;
         return this.x = e[0] * b + e[4] * c + e[8] * d + e[12], this.y = e[1] * b + e[5] * c + e[9] * d + e[13],
             this.z = e[2] * b + e[6] * c + e[10] * d + e[14], this;
-    }, a.Node = function(b) {
+    }, a.Node = function (b) {
         var c, d, e = [], f = [];
         if (this.polygons = [], this.front = this.back = void 0, b instanceof Array && 0 !== b.length) {
             for (this.divider = b[0].clone(), c = 0, d = b.length; c < d; c++) this.divider.splitPolygon(b[c], this.polygons, this.polygons, e, f);
             e.length > 0 && (this.front = new a.Node(e)), f.length > 0 && (this.back = new a.Node(f));
         }
-    }, a.Node.isConvex = function(a) {
+    }, a.Node.isConvex = function (a) {
         var b, c;
         for (b = 0; b < a.length; b++) for (c = 0; c < a.length; c++) if (b !== c && 2 !== a[b].classifySide(a[c])) return !1;
         return !0;
-    }, a.Node.prototype.build = function(b) {
+    }, a.Node.prototype.build = function (b) {
         var c, d, e = [], f = [];
         for (this.divider || (this.divider = b[0].clone()), c = 0, d = b.length; c < d; c++) this.divider.splitPolygon(b[c], this.polygons, this.polygons, e, f);
         e.length > 0 && (this.front || (this.front = new a.Node()), this.front.build(e)),
         f.length > 0 && (this.back || (this.back = new a.Node()), this.back.build(f));
-    }, a.Node.prototype.allPolygons = function() {
+    }, a.Node.prototype.allPolygons = function () {
         var a = this.polygons.slice();
         return this.front && (a = a.concat(this.front.allPolygons())), this.back && (a = a.concat(this.back.allPolygons())),
             a;
-    }, a.Node.prototype.clone = function() {
+    }, a.Node.prototype.clone = function () {
         var b = new a.Node();
-        return b.divider = this.divider.clone(), b.polygons = this.polygons.map(function(a) {
+        return b.divider = this.divider.clone(), b.polygons = this.polygons.map(function (a) {
             return a.clone();
         }), b.front = this.front && this.front.clone(), b.back = this.back && this.back.clone(),
             b;
-    }, a.Node.prototype.invert = function() {
+    }, a.Node.prototype.invert = function () {
         var a, b, c;
         for (a = 0, b = this.polygons.length; a < b; a++) this.polygons[a].flip();
         return this.divider.flip(), this.front && this.front.invert(), this.back && this.back.invert(),
             c = this.front, this.front = this.back, this.back = c, this;
-    }, a.Node.prototype.clipPolygons = function(a) {
+    }, a.Node.prototype.clipPolygons = function (a) {
         var b, c, d, e;
         if (!this.divider) return a.slice();
         for (d = [], e = [], b = 0, c = a.length; b < c; b++) this.divider.splitPolygon(a[b], d, e, d, e);
         return this.front && (d = this.front.clipPolygons(d)), e = this.back ? this.back.clipPolygons(e) : [],
             d.concat(e);
-    }, a.Node.prototype.clipTo = function(a) {
+    }, a.Node.prototype.clipTo = function (a) {
         this.polygons = a.clipPolygons(this.polygons), this.front && this.front.clipTo(a),
         this.back && this.back.clipTo(a);
     }, a;
@@ -200,7 +201,7 @@ window.ThreeBSP = function() {
 
 THREE.RingIdCount = 0;
 
-THREE.Neck = function() {
+THREE.Neck = function () {
     this.id = THREE.RingIdCount++, this.uuid = THREE.Math.generateUUID(), this.name = "base neck",
         this.path = null, this.pathType = "2D", this.geometry = null, this.resolution = 1 == platformMobile ? "low" : globalResolution,
         this.editName = [], this.editMarker = [], this.editOptions = [], this.editSelected = [],
@@ -212,7 +213,7 @@ THREE.Neck = function() {
 
 THREE.Neck.prototype = {
     constructor: THREE.Neck,
-    clone: function() {
+    clone: function () {
         var a = new THREE.Neck();
         a.name = this.name, a.id = THREE.RingIdCount++, a.geometry = this.geometry.clone();
         for (var b = 0; b < this.editName.length; b++) a.editName[b] = this.editName[b],
@@ -225,17 +226,17 @@ THREE.Neck.prototype = {
 
 THREE.EventDispatcher.prototype.apply(THREE.Neck.prototype);
 
-THREE.TextNeck = function(a, b) {
+THREE.TextNeck = function (a, b) {
     THREE.Neck.call(this), this.name = "Text necklace", this.editName.push("text change"),
-        this.editOptions.push([ 0, 1 ]), this.editSelected.push(0), this.editMarker.push(new THREE.Geometry()),
-        this.editName.push("text size"), this.editOptions.push([ 8, 10, 12, 14, 16, 20, 25, 30, 2, 4, 6 ]),
+        this.editOptions.push([0, 1]), this.editSelected.push(0), this.editMarker.push(new THREE.Geometry()),
+        this.editName.push("text size"), this.editOptions.push([8, 10, 12, 14, 16, 20, 25, 30, 2, 4, 6]),
         this.editSelected.push(0), this.editMarker.push(new THREE.Geometry()), this.editName.push("text height"),
-        this.editOptions.push([ 1, 1.1, 1.2, 1.3, 1.4, 1.5 ]), this.editSelected.push(0),
+        this.editOptions.push([1, 1.1, 1.2, 1.3, 1.4, 1.5]), this.editSelected.push(0),
         this.editMarker.push(new THREE.Geometry()), this.editName.push("letters connectors"),
-        this.editOptions.push([ "yes", "no" ]), this.editSelected.push(0), this.editMarker.push(new THREE.Geometry()),
-        this.editName.push("attach letters"), this.editOptions.push([ "no", "yes" ]), this.editSelected.push(1),
+        this.editOptions.push(["yes", "no"]), this.editSelected.push(0), this.editMarker.push(new THREE.Geometry()),
+        this.editName.push("attach letters"), this.editOptions.push(["no", "yes"]), this.editSelected.push(1),
         this.editMarker.push(new THREE.Geometry()), this.editName.push("limit length"),
-        this.editOptions.push([ "no", "yes" ]), this.editSelected.push(0), this.editMarker.push(new THREE.Geometry()),
+        this.editOptions.push(["no", "yes"]), this.editSelected.push(0), this.editMarker.push(new THREE.Geometry()),
         this.asmInfo = [], this.asmName.push("bail right"), this.asmMarker.push(new THREE.Geometry()),
         this.asmOptions.push({
             path: null,
@@ -289,18 +290,23 @@ THREE.TextNeck.prototype = {
         this.neckR;
         var b = this.editSelected[4];
         this.connect = !this.editSelected[3] && !b;
-        var c = 10 * this.editOptions[2][this.editSelected[2]], d = null != this.bevelSize ? this.bevelSize : c / 4, e = this.text, f = 10 * this.editOptions[1][this.editSelected[1]], g = Math.ceil(f / 10), h = c - (this.bevelEnabled ? 2 * d : 0), i = Math.max(3, Math.ceil(this.forceGrid ? .5 * g : "high" == this.resolution ? g : "med" == this.resolution ? .7 * g : .4 * g)), j = this.forceGrid || 0 == this.bevelEnabled ? 2 : d, k = this.forceGrid || 0 == this.bevelEnabled ? 0 : d, l = 0 == this.bevelEnabled ? 3 : Math.ceil(j), m = this.bevelEnabled, n = {
-            size: f,
-            amount: h,
-            curveSegments: i,
-            font: this.font,
-            weight: this.fontWeight,
-            style: this.fontStyle,
-            bevelThickness: j,
-            bevelSize: k,
-            bevelSegments: l,
-            bevelEnabled: m
-        }, o = new THREE.FontUtils.generateShapes(e, n);
+        var c = 10 * this.editOptions[2][this.editSelected[2]], d = null != this.bevelSize ? this.bevelSize : c / 4,
+            e = this.text, f = 10 * this.editOptions[1][this.editSelected[1]], g = Math.ceil(f / 10),
+            h = c - (this.bevelEnabled ? 2 * d : 0),
+            i = Math.max(3, Math.ceil(this.forceGrid ? .5 * g : "high" == this.resolution ? g : "med" == this.resolution ? .7 * g : .4 * g)),
+            j = this.forceGrid || 0 == this.bevelEnabled ? 2 : d, k = this.forceGrid || 0 == this.bevelEnabled ? 0 : d,
+            l = 0 == this.bevelEnabled ? 3 : Math.ceil(j), m = this.bevelEnabled, n = {
+                size: f,
+                amount: h,
+                curveSegments: i,
+                font: this.font,
+                weight: this.fontWeight,
+                style: this.fontStyle,
+                bevelThickness: j,
+                bevelSize: k,
+                bevelSegments: l,
+                bevelEnabled: m
+            }, o = new THREE.FontUtils.generateShapes(e, n);
         this.shapePath = o[0], this.shapeExtPath = o.slice(1, o.length), this.shapeHolePath = [];
 
         for (var p = 0; p < o.length; p++)
@@ -308,7 +314,7 @@ THREE.TextNeck.prototype = {
                 this.shapeHolePath.push(q.holes[r]);
 
         if (null != this.path && (this.shapePath = this.path, this.shapeExtPath = this.extPath,
-                this.shapeHolePath = this.holePath), null != this.path || this.forceTextPaths)
+            this.shapeHolePath = this.holePath), null != this.path || this.forceTextPaths)
             o = genTextShapesFromPaths(this.shapePath, this.shapeExtPath, this.shapeHolePath);
 
         (t = new THREE.ExtrudeGeometry(o, n)).computeBoundingBox();
@@ -325,7 +331,8 @@ THREE.TextNeck.prototype = {
         THREE.GeometryUtils.merge(t, _b);
         var v = this.circleRadius;
         if (new THREE.Shape().absarc(0, 0, v, 0, 2 * Math.PI), "rope2" == this.shape) ; else if ("rope3" == this.shape) ; else ;
-        var w = null, x = [], y = new THREE.Geometry(), z = (new THREE.Geometry(), Math.max(10, f / 12)), A = genRingSectionShape(z, 8, "court"), B = connShiftX = z / 2, C = 0;
+        var w = null, x = [], y = new THREE.Geometry(), z = (new THREE.Geometry(), Math.max(10, f / 12)),
+            A = genRingSectionShape(z, 8, "court"), B = connShiftX = z / 2, C = 0;
         this.shiftLetters = [];
         for (var D = 0; D < o.length; D++) {
             var E = o[D];
@@ -337,8 +344,11 @@ THREE.TextNeck.prototype = {
                 THREE.GeometryUtils.merge(G, zb), G.mergeVertices(), G.computeBoundingBox();
                 var H = G.boundingBox, I = H.size();
                 if (this.forceGrid) {
-                    var J = "high" == this.resolution ? (this.forceTextPaths && this.path, I.x / 2) : "med" == this.resolution ? I.x / 6 : I.x / 12, K = "high" == this.resolution ? (this.forceTextPaths && this.path,
-                    I.y / 2) : "med" == this.resolution ? I.y / 6 : I.y / 12, L = new THREE.CubeGeometry(I.x + 2, I.y + 2, .05, Math.ceil(J), Math.ceil(K), 1), M = new THREE.Mesh(L);
+                    var J = "high" == this.resolution ? (this.forceTextPaths && this.path, I.x / 2) : "med" == this.resolution ? I.x / 6 : I.x / 12,
+                        K = "high" == this.resolution ? (this.forceTextPaths && this.path,
+                        I.y / 2) : "med" == this.resolution ? I.y / 6 : I.y / 12,
+                        L = new THREE.CubeGeometry(I.x + 2, I.y + 2, .05, Math.ceil(J), Math.ceil(K), 1),
+                        M = new THREE.Mesh(L);
                     M.position.x += (H.max.x + H.min.x) / 2, M.position.y += (H.max.y + H.min.y) / 2,
                         M.position.z = H.max.z;
                     var N = new ThreeBSP(M), O = (O = new ThreeBSP(G)).subtract(N);
@@ -368,7 +378,9 @@ THREE.TextNeck.prototype = {
             s = (F = G.boundingBox).size();
             var U = (F.min.x + F.max.x) / 2, V = (F.min.y + F.max.y) / 2, W = new THREE.Matrix4();
             W.makeScale(u, u, 1);
-            var X = shapeApplyMatrix(E, W), Y = X.getLength(), Z = X.getSpacedPoints(Math.ceil(Y)), $ = -5e3, _ = 0, ab = 5e3, bb = 0, cb = -5e3, db = 0, eb = 5e3, fb = -5e3, gb = 5e3, hb = -5e3, ib = -5e3, jb = 0, kb = 0, lb = 5e3, mb = -5e3;
+            var X = shapeApplyMatrix(E, W), Y = X.getLength(), Z = X.getSpacedPoints(Math.ceil(Y)), $ = -5e3, _ = 0,
+                ab = 5e3, bb = 0, cb = -5e3, db = 0, eb = 5e3, fb = -5e3, gb = 5e3, hb = -5e3, ib = -5e3, jb = 0,
+                kb = 0, lb = 5e3, mb = -5e3;
             for (p = 0; p < Z.length; p++) {
                 var nb = Z[p].x, ob = Z[p].y;
                 nb >= $ && ($ = nb, _ = ob), nb <= ab && (ab = nb, bb = ob), ob <= eb && (eb = ob,
@@ -418,14 +430,15 @@ THREE.TextNeck.prototype = {
                 }
             }
             if (null == this.shiftLetters && (this.shiftLetters = []), this.shiftLetters.push(C),
-                    this.unionLetters) if (0 == D) var Ab = new ThreeBSP(G); else {
+                this.unionLetters) if (0 == D) var Ab = new ThreeBSP(G); else {
                 var Bb = new ThreeBSP(G);
                 Ab = Ab.union(Bb);
             } else THREE.GeometryUtils.merge(y, G);
             if (null != w) {
                 var Cb = !1;
                 if (w > U && (Gb < cb || Gb > cb) && null == this.path) {
-                    if (Gb < cb) var Db = new THREE.Vector3(U, gb + B, 0), Eb = new THREE.Vector3(Hb - connShiftX, Gb - B, 0); else {
+                    if (Gb < cb) var Db = new THREE.Vector3(U, gb + B, 0),
+                        Eb = new THREE.Vector3(Hb - connShiftX, Gb - B, 0); else {
                         Db = new THREE.Vector3(U, fb - B, 0), Eb = new THREE.Vector3(Hb - connShiftX, Gb - B, 0);
                         if (Jb > cb) {
                             w = $;
@@ -435,7 +448,8 @@ THREE.TextNeck.prototype = {
                     }
                     Cb = !0;
                 } else {
-                    var Nb = 1 == wb ? B : 1 == xb ? -B : 0, Ob = 1 == Lb ? B : 1 == Mb ? -B : Fb > Gb - B ? -B : Fb < Jb + B ? B : 0;
+                    var Nb = 1 == wb ? B : 1 == xb ? -B : 0,
+                        Ob = 1 == Lb ? B : 1 == Mb ? -B : Fb > Gb - B ? -B : Fb < Jb + B ? B : 0;
                     Db = new THREE.Vector3(ab + connShiftX, bb + Nb, 0), Eb = new THREE.Vector3(w - connShiftX, Fb + Ob, 0),
                         w = $, Fb = _, Gb = cb, Hb = db, Ib = V, Jb = eb, Kb = mb, Lb = ub, Mb = vb, x = Z;
                 }
@@ -492,7 +506,7 @@ THREE.TextNeck.prototype = {
         var jc = new THREE.Mesh(ic);
         var kc = (1 == this.text.length || "earring" == TYPE_SELECTED ? Xb.x : Wb.x) + Zb;
 
-        var  lc = (1 == this.text.length || "earring" == TYPE_SELECTED ? Xb.y : Wb.y) + $b;
+        var lc = (1 == this.text.length || "earring" == TYPE_SELECTED ? Xb.y : Wb.y) + $b;
         jc.position.y = lc + 10 - 8, jc.position.x = kc + (1 == this.text.length || "earring" == TYPE_SELECTED ? 0 : 2);
         var mc = new THREE.Geometry();
         THREE.GeometryUtils.merge(mc, jc), this.asmName[0] = 1 == this.text.length || "earring" == TYPE_SELECTED ? "bail" : "bail right",
@@ -515,7 +529,7 @@ THREE.TextNeck.prototype = {
     }
 };
 
-THREE.Ring = function() {
+THREE.Ring = function () {
     this.id = THREE.RingIdCount++,
         this.uuid = THREE.Math.generateUUID(),
         this.name = "base ring",
@@ -534,9 +548,9 @@ THREE.Ring = function() {
         this.position = [],
         this.rotation = [],
         this.scale = [],
-        this.position.push(new THREE.Vector3(0,0,0)),
-        this.rotation.push(new THREE.Vector3(0,0,0)),
-        this.scale.push(new THREE.Vector3(1,1,1)),
+        this.position.push(new THREE.Vector3(0, 0, 0)),
+        this.rotation.push(new THREE.Vector3(0, 0, 0)),
+        this.scale.push(new THREE.Vector3(1, 1, 1)),
         this.fontLang = "english",
         this.font = "optimer",
         this.fontWeight = "normal",
@@ -544,10 +558,9 @@ THREE.Ring = function() {
 };
 
 
-
 THREE.Ring.prototype = {
     constructor: THREE.Ring,
-    clone: function() {
+    clone: function () {
         var e = new THREE.Ring;
         e.name = this.name,
             e.id = THREE.RingIdCount++,
@@ -569,7 +582,7 @@ THREE.Ring.prototype = {
 
 THREE.EventDispatcher.prototype.apply(THREE.Ring.prototype);
 
-THREE.NameRing = function(e, t) {
+THREE.NameRing = function (e, t) {
     THREE.Ring.call(this),
         this.name = "Name ring",
         this.editName.push("text change"),
@@ -620,9 +633,9 @@ THREE.NameRing = function(e, t) {
         this.asmMarker.push(new THREE.Geometry),
         this.asmOptions.push({
             path: null,
-            position: new THREE.Vector3(0,0,0),
-            rotation: new THREE.Vector3(0,0,0),
-            scale: new THREE.Vector3(1,1,1)
+            position: new THREE.Vector3(0, 0, 0),
+            rotation: new THREE.Vector3(0, 0, 0),
+            scale: new THREE.Vector3(1, 1, 1)
         }),
         this.asmSelected.push(!1),
         this.asmObject.push(-1),
@@ -630,9 +643,9 @@ THREE.NameRing = function(e, t) {
         this.asmMarker.push(new THREE.Geometry),
         this.asmOptions.push({
             path: null,
-            position: new THREE.Vector3(0,0,0),
-            rotation: new THREE.Vector3(0,0,0),
-            scale: new THREE.Vector3(1,1,1)
+            position: new THREE.Vector3(0, 0, 0),
+            rotation: new THREE.Vector3(0, 0, 0),
+            scale: new THREE.Vector3(1, 1, 1)
         }),
         this.asmSelected.push(!1),
         this.asmObject.push(-1);
@@ -641,9 +654,9 @@ THREE.NameRing = function(e, t) {
             this.asmMarker.push(new THREE.Geometry),
             this.asmOptions.push({
                 path: null,
-                position: new THREE.Vector3(0,0,0),
-                rotation: new THREE.Vector3(0,0,0),
-                scale: new THREE.Vector3(1,1,1)
+                position: new THREE.Vector3(0, 0, 0),
+                rotation: new THREE.Vector3(0, 0, 0),
+                scale: new THREE.Vector3(1, 1, 1)
             }),
             this.asmSelected.push(!1),
             this.asmObject.push(-1);
@@ -670,7 +683,7 @@ THREE.NameRing = function(e, t) {
 
 THREE.NameRing.prototype = {
     constructor: THREE.Ring.prototype,
-    clone: function() {
+    clone: function () {
         var e = new THREE.NameRing(this.ringR);
         e.name = this.name,
             e.id = THREE.RingIdCount++,
@@ -687,13 +700,13 @@ THREE.NameRing.prototype = {
                 e.asmMarker[t] = this.asmMarker[t].clone();
         return e
     },
-    buildGeometry: function() {
+    buildGeometry: function () {
         this.lastTextSelected != this.editSelected[0] ? (this.path = null,
             this.extPath = [],
             this.holePath = [],
             addText()) : this.lastTextureSelected != this.editSelected[7] ? editTexture() : this.updateGeometry(this.text)
     },
-    updateGeometry: function(e) {
+    updateGeometry: function (e) {
         this.shapeName = "name" == this.shape ? "name ring" : "monogram ring",
             this.diameter = ringDiameter[this.editSelected[2]],
         null == this.lastDiameter && (this.lastDiameter = this.diameter),
@@ -714,12 +727,12 @@ THREE.NameRing.prototype = {
             , h = 10 * this.editOptions[4][this.editSelected[4]];
 
         if (null != this.path && (this.shapePath = this.path,
-                this.shapeExtPath = this.extPath,
-                this.shapeHolePath = this.holePath),
-            "monogram B" == this.shape)
-            var c = new THREE.MonogramNeck(this.ringR,!0);
+            this.shapeExtPath = this.extPath,
+            this.shapeHolePath = this.holePath),
+        "monogram B" == this.shape)
+            var c = new THREE.MonogramNeck(this.ringR, !0);
         else
-            c = new THREE.TextNeck(this.ringR,!0);
+            c = new THREE.TextNeck(this.ringR, !0);
 
         c.editOptions[2] = [this.editOptions[1][this.editSelected[1]]];
 
@@ -830,10 +843,10 @@ THREE.NameRing.prototype = {
         for (_ = 1 == this.editSelected[9] && "name" == this.shape ? s / 2 * .95 : s / 4,
                  T = 0; T < g.vertices.length; T++) {
             if ((u = g.vertices[T].x) < 0 & (D = g.vertices[T].z) < 0 & D <= H + _ & u < O && (O = u),
-                u < 0 & D > 0 & D >= f - _ & u < I && (I = u),
-                u > 0 & D < 0 & D <= C + _ & u > B && (B = u),
-                u > 0 & D > 0 & D >= S - _ & u > U && (U = u),
-                Math.abs(D) < _) {
+            u < 0 & D > 0 & D >= f - _ & u < I && (I = u),
+            u > 0 & D < 0 & D <= C + _ & u > B && (B = u),
+            u > 0 & D > 0 & D >= S - _ & u > U && (U = u),
+            Math.abs(D) < _) {
                 if (u > F) {
                     F = u;
                     var W = D
@@ -845,8 +858,8 @@ THREE.NameRing.prototype = {
             }
         }
         if (F -= 2,
-                A += 2,
-            0 == this.editSelected[9])
+            A += 2,
+        0 == this.editSelected[9])
             y = Math.min(r / 2 - 8, b.max.x + Math.max(Math.abs(C), Math.abs(S))),
                 d = Math.max(-r / 2 + 8, b.min.x - Math.max(Math.abs(H), Math.abs(f)));
         else
@@ -925,27 +938,28 @@ THREE.NameRing.prototype = {
         var ve = genRingSectionShapeReverse(o, s / 2, n);
         if (0 == this.editSelected[9] && 0 == p) {
             var xe = h / 20
-                , Ee = new THREE.CubicBezierCurve3(new THREE.Vector3(s / 4,0,d - .5),new THREE.Vector3(s / 4,0,d + 10),new THREE.Vector3(-H,0,O - 10 + xe),new THREE.Vector3(-H,0,O + xe));
+                ,
+                Ee = new THREE.CubicBezierCurve3(new THREE.Vector3(s / 4, 0, d - .5), new THREE.Vector3(s / 4, 0, d + 10), new THREE.Vector3(-H, 0, O - 10 + xe), new THREE.Vector3(-H, 0, O + xe));
             ue.extrudePath = Ee;
-            var ze = new THREE.ExtrudeGeometry(ve,ue)
+            var ze = new THREE.ExtrudeGeometry(ve, ue)
                 , Re = new THREE.Mesh(ze);
             Re.rotation.y = Math.PI / 2,
                 THREE.GeometryUtils.merge(X, Re);
-            var we = new THREE.CubicBezierCurve3(new THREE.Vector3(-s / 4,0,d - .5),new THREE.Vector3(-s / 4,0,d + 10),new THREE.Vector3(-f,0,I - 10 + xe),new THREE.Vector3(-f,0,I + xe));
+            var we = new THREE.CubicBezierCurve3(new THREE.Vector3(-s / 4, 0, d - .5), new THREE.Vector3(-s / 4, 0, d + 10), new THREE.Vector3(-f, 0, I - 10 + xe), new THREE.Vector3(-f, 0, I + xe));
             ue.extrudePath = we;
-            var be = new THREE.ExtrudeGeometry(ve,ue)
+            var be = new THREE.ExtrudeGeometry(ve, ue)
                 , Me = new THREE.Mesh(be);
             Me.rotation.y = Math.PI / 2,
                 THREE.GeometryUtils.merge(X, Me);
-            var He = new THREE.CubicBezierCurve3(new THREE.Vector3(s / 4,0,y + .5),new THREE.Vector3(s / 4,0,y - 10),new THREE.Vector3(-C,0,B - xe + 10),new THREE.Vector3(-C,0,B - xe));
+            var He = new THREE.CubicBezierCurve3(new THREE.Vector3(s / 4, 0, y + .5), new THREE.Vector3(s / 4, 0, y - 10), new THREE.Vector3(-C, 0, B - xe + 10), new THREE.Vector3(-C, 0, B - xe));
             ue.extrudePath = He;
-            var fe = new THREE.ExtrudeGeometry(ve,ue)
+            var fe = new THREE.ExtrudeGeometry(ve, ue)
                 , Ce = new THREE.Mesh(fe);
             Ce.rotation.y = Math.PI / 2,
                 THREE.GeometryUtils.merge(X, Ce);
-            var Se = new THREE.CubicBezierCurve3(new THREE.Vector3(-s / 4,0,y + .5),new THREE.Vector3(-s / 4,0,y - 10),new THREE.Vector3(-S,0,U - xe + 10),new THREE.Vector3(-S,0,U - xe));
+            var Se = new THREE.CubicBezierCurve3(new THREE.Vector3(-s / 4, 0, y + .5), new THREE.Vector3(-s / 4, 0, y - 10), new THREE.Vector3(-S, 0, U - xe + 10), new THREE.Vector3(-S, 0, U - xe));
             ue.extrudePath = Se;
-            var Pe = new THREE.ExtrudeGeometry(ve,ue)
+            var Pe = new THREE.ExtrudeGeometry(ve, ue)
                 , Ge = new THREE.Mesh(Pe);
             Ge.rotation.y = Math.PI / 2,
                 THREE.GeometryUtils.merge(X, Ge)
@@ -1057,7 +1071,7 @@ THREE.NameRing.prototype = {
             this.editMarker[8] = "monogram B" != this.shape ? De : new THREE.Geometry;
         _e = this.editName[8].split(":")[0];
         this.editName[8] = _e + ": " + this.editOptions[8][this.editSelected[8]];
-        var tt = new THREE.SphereGeometry(10,Math.floor(20),Math.floor(20))
+        var tt = new THREE.SphereGeometry(10, Math.floor(20), Math.floor(20))
             , it = new THREE.Mesh(tt);
         it.position.x = Ie.min.x - 40;
         var at = new THREE.Geometry;
@@ -1073,11 +1087,11 @@ THREE.NameRing.prototype = {
             this.editMarker[10] = ot;
         _e = this.editName[10].split(":")[0];
         this.editName[10] = _e + ": " + this.editOptions[10][this.editSelected[10]];
-        var rt = new THREE.Vector3(ke - o / 2,0,-(s / 2 + 6))
-            , nt = new THREE.Vector3(ke + o / 2,0,-(s / 2 + 6))
-            , ht = new THREE.Vector3(ke + o / 2,0,-(s / 2 + 2))
-            , ct = new THREE.Vector3(ke - o / 2,0,-(s / 2 + 2))
-            , lt = new THREE.LatheGeometry([rt, nt, ht, ct, rt],Math.floor(this.ringR / 2));
+        var rt = new THREE.Vector3(ke - o / 2, 0, -(s / 2 + 6))
+            , nt = new THREE.Vector3(ke + o / 2, 0, -(s / 2 + 6))
+            , ht = new THREE.Vector3(ke + o / 2, 0, -(s / 2 + 2))
+            , ct = new THREE.Vector3(ke - o / 2, 0, -(s / 2 + 2))
+            , lt = new THREE.LatheGeometry([rt, nt, ht, ct, rt], Math.floor(this.ringR / 2));
         lt.verticesNeedUpdate = !0,
             lt.computeFaceNormals(),
             this.asmMarker[0] = lt,
@@ -1090,11 +1104,11 @@ THREE.NameRing.prototype = {
             end: gt
         },
             this.asmOptions[0].rotation.z = Math.PI;
-        rt = new THREE.Vector3(ke + o / 2,0,s / 2 + 6),
-            nt = new THREE.Vector3(ke - o / 2,0,s / 2 + 6),
-            ht = new THREE.Vector3(ke - o / 2,0,s / 2 + 2),
-            ct = new THREE.Vector3(ke + o / 2,0,s / 2 + 2);
-        var pt = new THREE.LatheGeometry([rt, nt, ht, ct, rt],Math.floor(this.ringR / 2));
+        rt = new THREE.Vector3(ke + o / 2, 0, s / 2 + 6),
+            nt = new THREE.Vector3(ke - o / 2, 0, s / 2 + 6),
+            ht = new THREE.Vector3(ke - o / 2, 0, s / 2 + 2),
+            ct = new THREE.Vector3(ke + o / 2, 0, s / 2 + 2);
+        var pt = new THREE.LatheGeometry([rt, nt, ht, ct, rt], Math.floor(this.ringR / 2));
         pt.verticesNeedUpdate = !0,
             pt.computeFaceNormals(),
             this.asmMarker[1] = pt,
@@ -1109,7 +1123,7 @@ THREE.NameRing.prototype = {
 
 
 function genTextShapesFromPaths(a, b, c) {
-    var d = [], e = [ a ];
+    var d = [], e = [a];
     if (null != b) e = e.concat(b);
     for (var f = 0; f < e.length; f++) {
         var g = e[f];
@@ -1265,9 +1279,11 @@ function scaleBboxManualConnector(a, b, c, d, e) {
 }
 
 function genFlatRing(a, b, c, d, e, f) {
-    var g = (f = f || !1) ? "ultra-high" == e ? genRingSectionTextureHalfShape(b, c, d) : genRingSectionHalfShape(b, c, d) : "ultra-high" == e ? genRingSectionTextureShape(b, c, d) : genRingSectionShape(b, c, d), h = Math.min(600, "ultra-high" == e ? a : "high" == e ? a / 4 : "med" == e ? a / 8 : "med-low" == e ? a / 12 : a / 16), i = {
-        amount: 0
-    };
+    var g = (f = f || !1) ? "ultra-high" == e ? genRingSectionTextureHalfShape(b, c, d) : genRingSectionHalfShape(b, c, d) : "ultra-high" == e ? genRingSectionTextureShape(b, c, d) : genRingSectionShape(b, c, d),
+        h = Math.min(600, "ultra-high" == e ? a : "high" == e ? a / 4 : "med" == e ? a / 8 : "med-low" == e ? a / 12 : a / 16),
+        i = {
+            amount: 0
+        };
     i.bevelEnabled = !0, i.bevelThickness = a / 2, i.bevelSize = 0, i.bevelSegments = Math.ceil(h),
         i.steps = 1;
     var j = new THREE.ExtrudeGeometry(g, i), k = new THREE.Mesh(j);
@@ -1364,7 +1380,9 @@ function convertFlatToRing(a, b, c) {
 }
 
 function genArrowDualGeometry(a, b) {
-    var c = a || 60, d = b || 5, e = new THREE.CylinderGeometry(d, d, c, 8, Math.ceil(c / 4), !1), f = new THREE.CylinderGeometry(1, 1.4 * d, 10, 8, 4, !1), g = new THREE.Mesh(f), h = new THREE.CylinderGeometry(1.4 * d, 1, 10, 8, 4, !1), i = new THREE.Mesh(h);
+    var c = a || 60, d = b || 5, e = new THREE.CylinderGeometry(d, d, c, 8, Math.ceil(c / 4), !1),
+        f = new THREE.CylinderGeometry(1, 1.4 * d, 10, 8, 4, !1), g = new THREE.Mesh(f),
+        h = new THREE.CylinderGeometry(1.4 * d, 1, 10, 8, 4, !1), i = new THREE.Mesh(h);
     return g.position.y += c / 2 + 5, i.position.y -= c / 2 + 5, THREE.GeometryUtils.merge(e, g),
         THREE.GeometryUtils.merge(e, i), e;
 }
@@ -1383,5 +1401,5 @@ function genCircleNurbsPath(a, b) {
         c.push(new THREE.Vector4(a, 0, 0, 1)), c.push(new THREE.Vector4(a, -a, 0, .707)),
         c.push(new THREE.Vector4(0, -a, 0, 1)), c.push(new THREE.Vector4(-a, -a, 0, .707)),
         c.push(new THREE.Vector4(-a, 0, 0, 1)), c.push(new THREE.Vector4(-a, a, 0, .707)),
-        c.push(new THREE.Vector4(0, a, 0, 1)), b || (c = c.reverse()), new THREE.NURBSCurve(2, [ 0, 0, 0, .25, .25, .5, .5, .75, .75, 1, 1, 1 ], c);
+        c.push(new THREE.Vector4(0, a, 0, 1)), b || (c = c.reverse()), new THREE.NURBSCurve(2, [0, 0, 0, .25, .25, .5, .5, .75, .75, 1, 1, 1], c);
 }

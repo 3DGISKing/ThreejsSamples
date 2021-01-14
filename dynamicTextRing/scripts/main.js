@@ -58,17 +58,23 @@ var ACTIVE_SELECTED = null;
 var ACTIVE_SCROLL_INTERSECTED;
 var introMode = 0;
 
-var activeRingObj = null, activeRing, activeRingsObjects = [], activeRings = [], activeRingsMarkers = [], activeRingIndex = null;
-var defaultR = 80, defaultNeckR = 40, defaultEarR = 80, defaultBraceR = 200, defaultCuffLinkR = 40, defaultTieClipR = 40, mainRingR, mainRingT, mainRingH;
+var activeRingObj = null, activeRing, activeRingsObjects = [], activeRings = [], activeRingsMarkers = [],
+    activeRingIndex = null;
+var defaultR = 80, defaultNeckR = 40, defaultEarR = 80, defaultBraceR = 200, defaultCuffLinkR = 40,
+    defaultTieClipR = 40, mainRingR, mainRingT, mainRingH;
 
 var TEXTURE_SCROLL_INTERSECTED = null, asmMode = 0, ASM_INTERSECTED = null, ASM_INTERSECTED_prev_color;
-var asmTargetRotationY = 0, asmTargetRotationYOnMouseDown = 0, asmTargetRotationX = 0, asmTargetRotationXOnMouseDown = 0, asmMouseX = 0, asmMouseXOnMouseDown = 0, asmMouseY = 0, asmMouseYOnMouseDown = 0;
-var ARMode = 0, ARMesh, ARStart = !1, videoTex, videoCam, videoScene, threexAR, srcElement, markers = {}, wallMode = 1, prodMode = 0;
+var asmTargetRotationY = 0, asmTargetRotationYOnMouseDown = 0, asmTargetRotationX = 0,
+    asmTargetRotationXOnMouseDown = 0, asmMouseX = 0, asmMouseXOnMouseDown = 0, asmMouseY = 0, asmMouseYOnMouseDown = 0;
+var ARMode = 0, ARMesh, ARStart = !1, videoTex, videoCam, videoScene, threexAR, srcElement, markers = {}, wallMode = 1,
+    prodMode = 0;
 var exportMode = 0, exportObj, showExample = Math.floor(1e4 * Math.random());
 var printMode = 0, loadMode = 0, getImageData = false, previewImg = null;
-var mainRingObj, mainRing, mainRingG, lastMainRing, objTutorials = [], windowHalfX = window.innerWidth / 2, windowHalfY = window.innerHeight / 2, windowQuartY = window.innerHeight / 4, window3QuartY = 3 * window.innerHeight / 4;
+var mainRingObj, mainRing, mainRingG, lastMainRing, objTutorials = [], windowHalfX = window.innerWidth / 2,
+    windowHalfY = window.innerHeight / 2, windowQuartY = window.innerHeight / 4,
+    window3QuartY = 3 * window.innerHeight / 4;
 
-var pearSizeOptions = [ {
+var pearSizeOptions = [{
     w: 3,
     h: 4
 }, {
@@ -107,9 +113,9 @@ var pearSizeOptions = [ {
 }, {
     w: 10,
     h: 15
-} ];
+}];
 
-var marquiseSizeOptions = [ {
+var marquiseSizeOptions = [{
     w: 2,
     h: 4
 }, {
@@ -136,9 +142,9 @@ var marquiseSizeOptions = [ {
 }, {
     w: 8,
     h: 16
-} ];
+}];
 
-var ovalSizeOptions = [ {
+var ovalSizeOptions = [{
     w: 3,
     h: 5
 }, {
@@ -177,9 +183,9 @@ var ovalSizeOptions = [ {
 }, {
     w: 15,
     h: 20
-} ];
+}];
 
-var emeraldSizeOptions = [ {
+var emeraldSizeOptions = [{
     w: 3,
     h: 5
 }, {
@@ -215,9 +221,9 @@ var emeraldSizeOptions = [ {
 }, {
     w: 15,
     h: 20
-} ];
+}];
 
-var roundSizeOptions = [ {
+var roundSizeOptions = [{
     w: 2,
     h: 2
 }, {
@@ -262,9 +268,9 @@ var roundSizeOptions = [ {
 }, {
     w: 1.6,
     h: 1.6
-} ];
+}];
 
-var heartSizeOptions = [ {
+var heartSizeOptions = [{
     w: 3,
     h: 3
 }, {
@@ -294,9 +300,9 @@ var heartSizeOptions = [ {
 }, {
     w: 12,
     h: 12
-} ];
+}];
 
-var princessSizeOptions = [ {
+var princessSizeOptions = [{
     w: 2,
     h: 2
 }, {
@@ -335,9 +341,9 @@ var princessSizeOptions = [ {
 }, {
     w: 10,
     h: 10
-} ];
+}];
 
-var trillionSizeOptions = [ {
+var trillionSizeOptions = [{
     w: 2,
     h: 2
 }, {
@@ -376,9 +382,9 @@ var trillionSizeOptions = [ {
 }, {
     w: 10,
     h: 10
-} ];
+}];
 
-var cushionSizeOptions = [ {
+var cushionSizeOptions = [{
     w: 3,
     h: 5
 }, {
@@ -402,9 +408,9 @@ var cushionSizeOptions = [ {
 }, {
     w: 12,
     h: 14
-} ];
+}];
 
-var radiantSizeOptions = [ {
+var radiantSizeOptions = [{
     w: 3,
     h: 4
 }, {
@@ -437,11 +443,11 @@ var radiantSizeOptions = [ {
 }, {
     w: 10,
     h: 12
-} ];
+}];
 
-var ringDiameterNames = [ "US 3", "US 3.5", "US 4", "US 4.5", "US 5", "US 5.5", "US 6", "US 6.5", "US 7", "US 7.5", "US 8", "US 8.5", "US 9", "US 9.5", "US 10", "US 10.5", "US 11", "US 11.5", "US 12", "US 12.5", "US 13", "US 13.5", "US 14", "US 14.5", "US 15" ];
+var ringDiameterNames = ["US 3", "US 3.5", "US 4", "US 4.5", "US 5", "US 5.5", "US 6", "US 6.5", "US 7", "US 7.5", "US 8", "US 8.5", "US 9", "US 9.5", "US 10", "US 10.5", "US 11", "US 11.5", "US 12", "US 12.5", "US 13", "US 13.5", "US 14", "US 14.5", "US 15"];
 
-var ringDiameter = [ 141, 145, 149, 152.7, 157, 161, 165.1, 169.2, 173.5, 177.5, 181.9, 185.3, 188.9, 194.1, 198.4, 202, 206.8, 210.8, 214.9, 218.9, 223.3, 226, 230, 234.2, 238.3 ];
+var ringDiameter = [141, 145, 149, 152.7, 157, 161, 165.1, 169.2, 173.5, 177.5, 181.9, 185.3, 188.9, 194.1, 198.4, 202, 206.8, 210.8, 214.9, 218.9, 223.3, 226, 230, 234.2, 238.3];
 var ringSizeOptions = [];
 
 for (var i = 0; i < ringDiameter.length; i++)
@@ -457,26 +463,66 @@ var wg = {
         "primary2": "#4c4a48",
         "material": null
     },
-    sds_model: {"id":2402,"name":"name ring","type":"ring","color":0,"items":[{"name":"Name ring","id":14,"shape":"name","text":"Songri Paio","font":"script","fontLang":"english","fontWeight":"bold","fontStyle":"normal","ringR":90.95,"volume":178.35285476296,"area":654.60222851388,"extPathActions":[],"extPathCurves":[],"extPathNurbs":[],"extPathTypes":[],"holePathActions":[],"holePathCurves":[],"holePathNurbs":[],"holePathTypes":[],"position":[{"x":0,"y":0,"z":0}],"rotation":[{"x":0,"y":0,"z":0}],"editSelected":[0,1,10,2,2,1,0,0,1,0,0],"asmSelected":[false,false,false,false,false,false,false,false,false,false],"asmObject":[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]}],"updated":{"date":"2018-02-18 17:25:06.000000","timezone_type":3,"timezone":"America\/New_York"},"owner":"isaac@wizegem.com","originator":"isaac@wizegem.com","private":true,"c_edit":false,"viewer":false,"viewer_name":"","view_count":1357,"resources":[{"texture":{"grayScale":null,"width":null,"height":null}}]},
-    "exclude": ["add letters connectors","attach letters","texture type","user-save","material-change"]
+    sds_model: {
+        "id": 2402,
+        "name": "name ring",
+        "type": "ring",
+        "color": 0,
+        "items": [{
+            "name": "Name ring",
+            "id": 14,
+            "shape": "name",
+            "text": "Songri Paio",
+            "font": "script",
+            "fontLang": "english",
+            "fontWeight": "bold",
+            "fontStyle": "normal",
+            "ringR": 90.95,
+            "volume": 178.35285476296,
+            "area": 654.60222851388,
+            "extPathActions": [],
+            "extPathCurves": [],
+            "extPathNurbs": [],
+            "extPathTypes": [],
+            "holePathActions": [],
+            "holePathCurves": [],
+            "holePathNurbs": [],
+            "holePathTypes": [],
+            "position": [{"x": 0, "y": 0, "z": 0}],
+            "rotation": [{"x": 0, "y": 0, "z": 0}],
+            "editSelected": [0, 1, 10, 2, 2, 1, 0, 0, 1, 0, 0],
+            "asmSelected": [false, false, false, false, false, false, false, false, false, false],
+            "asmObject": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+        }],
+        "updated": {"date": "2018-02-18 17:25:06.000000", "timezone_type": 3, "timezone": "America\/New_York"},
+        "owner": "isaac@wizegem.com",
+        "originator": "isaac@wizegem.com",
+        "private": true,
+        "c_edit": false,
+        "viewer": false,
+        "viewer_name": "",
+        "view_count": 1357,
+        "resources": [{"texture": {"grayScale": null, "width": null, "height": null}}]
+    },
+    "exclude": ["add letters connectors", "attach letters", "texture type", "user-save", "material-change"]
 };
 
-if (typeof person != "undefined" && person )
+if (typeof person != "undefined" && person)
     wg.sds_model.items["text"] = person;
 
 wg.edits = {};
 
 wg.edits["Name ring"] = {
-    "name":"Name ring",
-    "edits":[
+    "name": "Name ring",
+    "edits": [
         {
-            "text change":[
+            "text change": [
                 0,
                 1
             ]
         },
         {
-            "ring depth":[
+            "ring depth": [
                 0.8,
                 0.9,
                 1,
@@ -488,7 +534,7 @@ wg.edits["Name ring"] = {
             ]
         },
         {
-            "ring diameter":[
+            "ring diameter": [
                 "US 3",
                 "US 3.5",
                 "US 4",
@@ -517,7 +563,7 @@ wg.edits["Name ring"] = {
             ]
         },
         {
-            "ring height":[
+            "ring height": [
                 2,
                 2.5,
                 3,
@@ -527,7 +573,7 @@ wg.edits["Name ring"] = {
             ]
         },
         {
-            "name size":[
+            "name size": [
                 7,
                 8,
                 10,
@@ -538,13 +584,13 @@ wg.edits["Name ring"] = {
             ]
         },
         {
-            "add letters connectors":[
+            "add letters connectors": [
                 "yes",
                 "no"
             ]
         },
         {
-            "ring section":[
+            "ring section": [
                 "edgeless",
                 "convex",
                 "D shape",
@@ -553,26 +599,26 @@ wg.edits["Name ring"] = {
             ]
         },
         {
-            "texture change":[
+            "texture change": [
                 0,
                 1
             ]
         },
         {
-            "attach letters":[
+            "attach letters": [
                 "no",
                 "yes"
             ]
         },
         {
-            "shank type":[
+            "shank type": [
                 "split",
                 "streight",
                 "none"
             ]
         },
         {
-            "texture type":[
+            "texture type": [
                 "normal",
                 "negative"
             ]
@@ -581,19 +627,19 @@ wg.edits["Name ring"] = {
 };
 
 var wizegem = {
-    'view_mode'   : true,	/* indicates viewer */
-    'user_model'  : false,	/* its a user clone */
-    'user_name'   : null,	/* user email */
-    'sds'		  : true, 	/* sds mode (used with view_mode) */
-    'render'      : false,  /* render only mode */
-    'loaded'      : [],     /* loaded modules */
-    'fonts'       : [],     /* loaded fonts */
-    'env'         : 'p',    /* environment */
-    'cache_hash'  : '1530716556'
+    'view_mode': true,	/* indicates viewer */
+    'user_model': false,	/* its a user clone */
+    'user_name': null,	/* user email */
+    'sds': true, 	/* sds mode (used with view_mode) */
+    'render': false,  /* render only mode */
+    'loaded': [],     /* loaded modules */
+    'fonts': [],     /* loaded fonts */
+    'env': 'p',    /* environment */
+    'cache_hash': '1530716556'
 };
 
 function wg_bootstrap() {
-    init(function() {
+    init(function () {
         onBootComplete();
         animate();
     })
@@ -601,7 +647,7 @@ function wg_bootstrap() {
 
 function init(callback) {
     container = document.createElement("div");
-    camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight, 0.1, 1120);
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1120);
 
     camera.position.z = 400;
     camera.position.y = 0;
@@ -616,7 +662,7 @@ function init(callback) {
     controls.noPan = false;
     controls.staticMoving = false;
     controls.dynamicDampingFactor = 0.3;
-   // controls.enabled = false;
+    // controls.enabled = false;
 
     scene = new THREE.Scene();
 
@@ -625,10 +671,9 @@ function init(callback) {
 
     scene.add(light);
 
-    var helper = new THREE.DirectionalLightHelper( light, 5 );
+    var helper = new THREE.DirectionalLightHelper(light, 5);
 
-    scene.add( helper );
-
+    scene.add(helper);
 
     genGemColorTable();
     genPearlTable();
@@ -648,7 +693,7 @@ function init(callback) {
     renderer.shadowMapEnabled = true;
     renderer.shadowMapType = THREE.PCFShadowMap;
 
-    document.body.appendChild( renderer.domElement );
+    document.body.appendChild(renderer.domElement);
     renderer.clearColor();
 
     var b = document.createElement("div");
@@ -667,11 +712,11 @@ function init(callback) {
 
     createMaterials();
 
-   // createAxis();
+    // createAxis();
 
     var i = "Design/Client/textures/";
 
-    THREE.ImageUtils.loadTexture("Design/Client/textures/material1_58.jpg", void 0, function(texture) {
+    THREE.ImageUtils.loadTexture("Design/Client/textures/material1_58.jpg", void 0, function (texture) {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.anisotropy = 16;
@@ -681,7 +726,7 @@ function init(callback) {
 
         var s = [i + "pisa_px.jpg", i + "pisa_nx.jpg", i + "pisa_py.jpg", i + "pisa_ny.jpg", i + "pisa_pz.jpg", i + "pisa_nz.jpg"];
 
-        THREE.ImageUtils.loadTextureCube(s, THREE.CubeRefractionMapping, function(texture) {
+        THREE.ImageUtils.loadTextureCube(s, THREE.CubeRefractionMapping, function (texture) {
             metalEnvTexture = texture;
             goldM.envMap = metalEnvTexture;
 
@@ -697,16 +742,16 @@ function activeObjectsMouseMove(e) {
 function activeObjectsMove(e) {
     mouse.x = e.clientX / window.innerWidth * 2 - 1,
         mouse.y = -e.clientY / window.innerHeight * 2 + 1;
-    var t = new THREE.Vector3(mouse.x,mouse.y,1);
+    var t = new THREE.Vector3(mouse.x, mouse.y, 1);
     t.unproject(camera),
         raycaster.set(camera.position, t.sub(camera.position).normalize());
     var i = raycaster.intersectObjects(activeDispGroup);
     if (i.length > 0) {
         if (ACTIVE_INTERSECTED != i[0].object && (null != ACTIVE_INTERSECTED && ACTIVE_INTERSECTED.material.color.setHex(ACTIVE_INTERSECTED_prev_color),
-                ACTIVE_INTERSECTED = i[0].object,
-                ACTIVE_INTERSECTED_prev_color = ACTIVE_INTERSECTED.material.color.getHex(),
-            ACTIVE_INTERSECTED != ACTIVE_SELECTED && ACTIVE_INTERSECTED.material.color.setHex(markerNotSelColor[0]),
-                helpMode)) {
+            ACTIVE_INTERSECTED = i[0].object,
+            ACTIVE_INTERSECTED_prev_color = ACTIVE_INTERSECTED.material.color.getHex(),
+        ACTIVE_INTERSECTED != ACTIVE_SELECTED && ACTIVE_INTERSECTED.material.color.setHex(markerNotSelColor[0]),
+            helpMode)) {
             for (var s = 0; s < activeRingsMarkers.length; s++)
                 if (activeRingsMarkers[s].insId == ACTIVE_INTERSECTED.insId)
                     var a = activeRingsObjects[s];
@@ -747,7 +792,7 @@ function activeScrollMouseClick(e) {
 function activeScrollMove(e) {
     mouse.x = e.clientX / window.innerWidth * 2 - 1,
         mouse.y = -e.clientY / window.innerHeight * 2 + 1;
-    var t = new THREE.Vector3(mouse.x,mouse.y,1);
+    var t = new THREE.Vector3(mouse.x, mouse.y, 1);
     t.unproject(camera),
         raycaster.set(camera.position, t.sub(camera.position).normalize());
     var i = raycaster.intersectObjects(activeScrollGroup);
@@ -770,6 +815,7 @@ function RemoveActive(e, t) {
         scene.remove(activeDispGroup[s]);
     activeDispGroup = []
 }
+
 function DispActive(e, t) {
     for (var i = e, s = 0; i <= t && i < activeRingsMarkers.length; i++,
         s++) {
@@ -806,7 +852,7 @@ function asmAreaMove(a, b) {
 
 function asmAreaMouseUp(a) {
     document.removeEventListener("mousemove", asmAreaMouseMove, !1), document.removeEventListener("mouseup", asmAreaMouseUp, !1),
-    document.removeEventListener("mouseout", asmAreaMouseOut, !1);
+        document.removeEventListener("mouseout", asmAreaMouseOut, !1);
 }
 
 function asmAreaMouseOut(a) {
@@ -830,28 +876,27 @@ function createAxis() {
     var headLength = length * 0.1;
     var headWidth = length * 0.03;
 
-    var xdir = new THREE.Vector3( 1, 0, 0 );
+    var xdir = new THREE.Vector3(1, 0, 0);
 
-    var origin = new THREE.Vector3( 0, 0, 0 );
+    var origin = new THREE.Vector3(0, 0, 0);
 
     var hex = 0xff0000;
 
-    var arrowHelper = new THREE.ArrowHelper( xdir, origin, length, hex, headLength, headWidth );
-    scene.add( arrowHelper );
+    var arrowHelper = new THREE.ArrowHelper(xdir, origin, length, hex, headLength, headWidth);
+    scene.add(arrowHelper);
 
-    var ydir = new THREE.Vector3( 0, 1, 0 );
+    var ydir = new THREE.Vector3(0, 1, 0);
     hex = 0xffff00;
 
-    arrowHelper = new THREE.ArrowHelper( ydir, origin, length, hex, headLength, headWidth );
-    scene.add( arrowHelper );
+    arrowHelper = new THREE.ArrowHelper(ydir, origin, length, hex, headLength, headWidth);
+    scene.add(arrowHelper);
 
-    var zdir = new THREE.Vector3( 0, 0, 1 );
+    var zdir = new THREE.Vector3(0, 0, 1);
     hex = 0x0000ff;
 
-    arrowHelper = new THREE.ArrowHelper( zdir, origin, length, hex, headLength, headWidth );
-    scene.add( arrowHelper );
+    arrowHelper = new THREE.ArrowHelper(zdir, origin, length, hex, headLength, headWidth);
+    scene.add(arrowHelper);
 }
-
 
 function onWindowResize() {
     windowHalfX = window.innerWidth / 2;
@@ -872,13 +917,12 @@ function render() {
     if (mainRing == null)
         return;
 
-    //controls.update();
-   // renderer.autoClear = false;
-   // renderer.clear();
+    controls.update();
+    // renderer.autoClear = false;
+    // renderer.clear();
     renderer.render(scene, camera);
 
-
-    if (mainRing && mainRing.rotation){
+    if (mainRing && mainRing.rotation) {
         mainRing.rotation.y += .05 * (asmTargetRotationY - mainRing.rotation.y);
 
         mainRing.rotation.x += .05 * (asmTargetRotationX - mainRing.rotation.x);
@@ -886,8 +930,7 @@ function render() {
         var x = document.getElementById("refreshDiv");
 
         x.style.display = "none";
-    }
-    else {
+    } else {
         var x = document.getElementById("refreshDiv");
 
         x.style.display = "block";
@@ -937,7 +980,7 @@ function createMaterials() {
     var bumpScale = 1;
     var shading = THREE.SmoothShading;
     var specularMetal = 1249551;
-    var specularPlastic = 0 ;
+    var specularPlastic = 0;
 
     goldM = new THREE.MeshPhongMaterial({
         bumpScale: bumpScale,
@@ -950,37 +993,37 @@ function createMaterials() {
     });
 
     gemM = new THREE.MeshPhongMaterial({
-            color: goldColor,
-            refractionRatio: .95
-        });
+        color: goldColor,
+        refractionRatio: .95
+    });
     pearlMaterial = new THREE.MeshPhongMaterial({
-            bumpScale: bumpScale,
-            color: goldColor,
-            ambient: 0,
-            specular: specularMetal,
-            shininess: 20,
-            shading: shading
-        });
+        bumpScale: bumpScale,
+        color: goldColor,
+        ambient: 0,
+        specular: specularMetal,
+        shininess: 20,
+        shading: shading
+    });
     beadMaterial = new THREE.MeshPhongMaterial({
-            bumpScale: bumpScale,
-            color: goldColor,
-            ambient: 0,
-            specular: specularPlastic,
-            shininess: 1,
-            shading: shading
-        });
+        bumpScale: bumpScale,
+        color: goldColor,
+        ambient: 0,
+        specular: specularPlastic,
+        shininess: 1,
+        shading: shading
+    });
     cabochonMaterial = new THREE.MeshPhongMaterial({
-            bumpScale: bumpScale,
-            color: goldColor,
-            ambient: 0,
-            specular: specularMetal,
-            shininess: 20,
-            shading: shading
-        });
+        bumpScale: bumpScale,
+        color: goldColor,
+        ambient: 0,
+        specular: specularMetal,
+        shininess: 20,
+        shading: shading
+    });
 
-    markerNotSelColor = [ 2611239, 12120504, 5831768, 7398512, 8834694, 326404, 4830793, 239363, 1936669, 1536279, 1135889, 87041 ];
+    markerNotSelColor = [2611239, 12120504, 5831768, 7398512, 8834694, 326404, 4830793, 239363, 1936669, 1536279, 1135889, 87041];
 
-    for(var  ii = 0; ii < 30; ii++) markerNotSelColor.push(87041);
+    for (var ii = 0; ii < 30; ii++) markerNotSelColor.push(87041);
 }
 
 function GenMainArea(e) {
@@ -1005,14 +1048,14 @@ function GenMainArea(e) {
     iconScrollGroup.push(iconPrev);
     iconScrollGroup.push(iconNext);
 
-    activePrev = new THREE.Mesh(genArrowGeometry(),globalArrowM.clone());
+    activePrev = new THREE.Mesh(genArrowGeometry(), globalArrowM.clone());
 
     activePrev.position.x = 800;
     activePrev.position.y = 360;
     activePrev.position.z = -200;
     activePrev.name = "active previous";
 
-    activeNext = new THREE.Mesh(genArrowGeometry(),globalArrowM.clone());
+    activeNext = new THREE.Mesh(genArrowGeometry(), globalArrowM.clone());
 
     activeNext.rotation.x = Math.PI;
     activeNext.position.x = 800;
@@ -1026,14 +1069,14 @@ function GenMainArea(e) {
     //scene.add(activePrev);
     //scene.add(activeNext);
 
-    texturePrev = new THREE.Mesh(genArrowGeometry(),globalArrowM.clone());
+    texturePrev = new THREE.Mesh(genArrowGeometry(), globalArrowM.clone());
 
-    texturePrev .position.x = -500;
+    texturePrev.position.x = -500;
     texturePrev.position.y = 310;
     texturePrev.position.z = -100;
     texturePrev.name = "texture previous";
 
-    textureNext = new THREE.Mesh(genArrowGeometry(),globalArrowM.clone());
+    textureNext = new THREE.Mesh(genArrowGeometry(), globalArrowM.clone());
 
     textureNext.rotation.x = Math.PI;
     textureNext.position.x = -500;
@@ -1106,41 +1149,40 @@ function getObjectFont(e) {
             -1 == wizegem.fonts.indexOf(a) && -1 == i.indexOf(a) && i.push(a)
         }
     if (0 == i.length && -1 == wizegem.fonts.indexOf(t.optimer.normal) && i.push(t.optimer.normal),
-        0 == i.length)
+    0 == i.length)
         return Promise.resolve();
     var o = "d" == wizegem.env ? "Design/Client/fonts/" : "dist/"
         , r = "d" == wizegem.env ? ".js" : ".min.js"
         , n = [];
 
-    return i.forEach(function(e) {
-        n.push(new Promise(function(t, i) {
+    return i.forEach(function (e) {
+        n.push(new Promise(function (t, i) {
                 $.ajaxSetup({
                     cache: !0
                 }),
-                $.getScript( o + e + r /*+ "?v=" + wizegem.cache_hash ugi*/).done(function(i, s) {
-                    wizegem.fonts.push(e),
-                        t()
-                }).fail(function(e, t, s) {
-                    alert("failed to find: 'dist/script_bold.typeface.min.js'");
-                    i()
-                }),
-                $.ajaxSetup({
-                    cache: !1
-                })
+                    $.getScript(o + e + r /*+ "?v=" + wizegem.cache_hash ugi*/).done(function (i, s) {
+                        wizegem.fonts.push(e),
+                            t()
+                    }).fail(function (e, t, s) {
+                        alert("failed to find: 'dist/script_bold.typeface.min.js'");
+                        i()
+                    }),
+                    $.ajaxSetup({
+                        cache: !1
+                    })
             }
         ))
     }),
-    Promise.all(n)
+        Promise.all(n)
 }
 
-function parseSrvObj(e, t)
-{
+function parseSrvObj(e, t) {
     var i, s;
 
     i = "object" == typeof e ? e : JSON.parse(e);
 
     getObjectFont(i.items).then(function () {
-        
+
     }).then(function () {
         mainRing = {};
         activeRingsMarkers = [];
@@ -1148,8 +1190,7 @@ function parseSrvObj(e, t)
         activeStart = 0;
         activeEnd = activeSize - 1;
 
-        genJewelryObjects(i.items, function()
-        {
+        genJewelryObjects(i.items, function () {
             if (!wizegem.view_mode && !wizegem.sds)
                 for (var e = 0; e < activeRingsObjects.length; e++)
                     addActiveObject(activeRingsObjects[e]);
@@ -1157,7 +1198,7 @@ function parseSrvObj(e, t)
             asmTargetRotationY = Math.PI / 4;
             asmTargetRotationX = 0;
 
-           // mainRing.material.wireframe = true;
+            // mainRing.material.wireframe = true;
             scene.add(mainRing);
             activeRing = mainRing;
             activeRingObj = mainRingObj;
@@ -1168,20 +1209,21 @@ function parseSrvObj(e, t)
             window.cust = i.c_edit;
             wizegem.view_mode || showModelOptions(mainRingModelName, mainRingModelId),
             wizegem.view_mode || wizegem.sds || (ACTIVE_SELECTED = activeRingsMarkers[0], ACTIVE_SELECTED_prev_color = activeRingsMarkers[0].material.color.getHex(),
-            ACTIVE_SELECTED.material.color.setHex(markerSelColor)),
-            t()
+                ACTIVE_SELECTED.material.color.setHex(markerSelColor)),
+                t()
         });
     }).catch(function (a, b) {
 
-    }) ;
+    });
 }
 
 function showModelOptions() {
-    
+
 }
 
 function genArrowGeometry(a, b) {
-    var c = a || 40, d = b || 5, e = new THREE.CylinderGeometry(d, d, c, 8, 2, !1), f = new THREE.CylinderGeometry(1, 1.4 * d, .375 * c, 8, 5, !1), g = new THREE.Mesh(f);
+    var c = a || 40, d = b || 5, e = new THREE.CylinderGeometry(d, d, c, 8, 2, !1),
+        f = new THREE.CylinderGeometry(1, 1.4 * d, .375 * c, 8, 5, !1), g = new THREE.Mesh(f);
     return g.position.y += 1.375 * c / 2 - .5, THREE.GeometryUtils.merge(e, g), e;
 }
 
@@ -1218,28 +1260,28 @@ function genJewelryObjects(items, onComplete) {
         }
 
         if (currRingObj.id = item.id,
-            currRingObj.id >= THREE.RingIdCount && (THREE.RingIdCount = currRingObj.id),
-            null != item.shape && (currRingObj.shape = item.shape),
-            null != item.text && (currRingObj.text = item.text),
-            null != item.font && (currRingObj.font = item.font),
-            null != item.fontLang && (currRingObj.fontLang = item.fontLang),
-            null != item.fontWeight && (currRingObj.fontWeight = item.fontWeight),
-            null != item.fontStyle && (currRingObj.fontStyle = item.fontStyle),
-            null != item.typeface && (currRingObj.typeface = item.typeface,
-                eval(currRingObj.typeface),
-                specialFont = {
-                    font: item.font,
-                    fontWeight: item.fontWeight
-                }),
-            null != item.texture && (currRingObj.texture = item.texture),
-            null != item.ringTexture && (currRingObj.ringTexture = item.ringTexture),
-            null != item.ringR && (currRingObj.ringR = item.ringR),
-            null != item.neckR && (currRingObj.neckR = item.neckR),
-            null != item.accR && (currRingObj.accR = item.accR),
-                currRingObj.loadNewPath = !0,
-            null != item.pathPoints && (currRingObj.pathPoints = item.pathPoints,
-                currRingObj.path = new THREE.Path(item.pathPoints)),
-            null != item.pathActions) {
+        currRingObj.id >= THREE.RingIdCount && (THREE.RingIdCount = currRingObj.id),
+        null != item.shape && (currRingObj.shape = item.shape),
+        null != item.text && (currRingObj.text = item.text),
+        null != item.font && (currRingObj.font = item.font),
+        null != item.fontLang && (currRingObj.fontLang = item.fontLang),
+        null != item.fontWeight && (currRingObj.fontWeight = item.fontWeight),
+        null != item.fontStyle && (currRingObj.fontStyle = item.fontStyle),
+        null != item.typeface && (currRingObj.typeface = item.typeface,
+            eval(currRingObj.typeface),
+            specialFont = {
+                font: item.font,
+                fontWeight: item.fontWeight
+            }),
+        null != item.texture && (currRingObj.texture = item.texture),
+        null != item.ringTexture && (currRingObj.ringTexture = item.ringTexture),
+        null != item.ringR && (currRingObj.ringR = item.ringR),
+        null != item.neckR && (currRingObj.neckR = item.neckR),
+        null != item.accR && (currRingObj.accR = item.accR),
+            currRingObj.loadNewPath = !0,
+        null != item.pathPoints && (currRingObj.pathPoints = item.pathPoints,
+            currRingObj.path = new THREE.Path(item.pathPoints)),
+        null != item.pathActions) {
             currRingObj.path = new THREE.Path;
             for (var c = 0; c < item.pathActions.length; c++) {
                 var action = item.pathActions[c].action
@@ -1258,8 +1300,8 @@ function genJewelryObjects(items, onComplete) {
         }
 
         if (null != item.pathNurbs && (currRingObj.path = new THREE.NURBSCurve(item.pathNurbs.degree, item.pathNurbs.knots, item.pathNurbs.controlPoints)),
-            (null != item.extPathActions || null != item.extPathCurves || null != item.extPathNurbs) && (currRingObj.extPath = [],
-            null != item.extPathTypes))
+        (null != item.extPathActions || null != item.extPathCurves || null != item.extPathNurbs) && (currRingObj.extPath = [],
+        null != item.extPathTypes))
             var currExtPathActions = []
                 , currExtPathCurves = []
                 , currExtPathNurbs = [];
@@ -1298,7 +1340,7 @@ function genJewelryObjects(items, onComplete) {
                     nurbsIndex += 1);
 
         if ((null != item.holePathActions || null != item.holePathCurves || null != item.holePathNurbs) && (currRingObj.holePath = [],
-            null != item.extPathTypes))
+        null != item.extPathTypes))
             var currHolePathActions = []
                 , currHolePathCurves = []
                 , currHolePathNurbs = [];
@@ -1338,7 +1380,7 @@ function genJewelryObjects(items, onComplete) {
                     nurbsIndex += 1);
 
         if ((null != item.embossPathActions || null != item.embossPathCurves || null != item.embossPathNurbs) && (currRingObj.embossPath = [],
-            null != item.embossPathTypes))
+        null != item.embossPathTypes))
             var currEmbossPathActions = []
                 , currEmbossPathCurves = []
                 , currEmbossPathNurbs = [];
@@ -1376,9 +1418,9 @@ function genJewelryObjects(items, onComplete) {
                     nurbsIndex += 1);
 
         if (null != item.nurbs && (currRingObj.nurbs = item.nurbs),
-            null != item.lastPathSelected && (currRingObj.lastPathSelected = item.lastPathSelected),
-            null != item.lastGeometrySelected && (currRingObj.lastGeometrySelected = item.lastGeometrySelected),
-            null != item.iconGeometry)
+        null != item.lastPathSelected && (currRingObj.lastPathSelected = item.lastPathSelected),
+        null != item.lastGeometrySelected && (currRingObj.lastGeometrySelected = item.lastGeometrySelected),
+        null != item.iconGeometry)
             for (var c = 0; c < item.iconGeometry.length; c++) {
                 for (var loader = new THREE.STLLoader, iconG = loader.parseASCII(item.iconGeometry[c]), faceVertexUv = [], f = 0; f < iconG.faces.length; f++)
                     faceVertexUv.push([new THREE.Vector2(iconG.vertices[iconG.faces[f].a].x, iconG.vertices[iconG.faces[f].a].y), new THREE.Vector2(iconG.vertices[iconG.faces[f].b].x, iconG.vertices[iconG.faces[f].b].y), new THREE.Vector2(iconG.vertices[iconG.faces[f].c].x, iconG.vertices[iconG.faces[f].c].y)]);
@@ -1408,7 +1450,7 @@ function genJewelryObjects(items, onComplete) {
                                 a.scale.x = a.scale.y = a.scale.z = 10;
                                 t = new THREE.Geometry;
                                 if (THREE.GeometryUtils.merge(t, a),
-                                    null == item.objType)
+                                null == item.objType)
                                     currRingObj.objG = t.clone();
                                 else if ("obj" == item.objType)
                                     currRingObj.objG = t.clone();
@@ -1484,12 +1526,13 @@ function genJewelryObjects(items, onComplete) {
                         var s = [i + "pisa_px.jpg", i + "pisa_nx.jpg", i + "pisa_py.jpg", i + "pisa_ny.jpg", i + "pisa_pz.jpg", i + "pisa_nz.jpg"];
                         THREE.ImageUtils.loadTextureCube(s, THREE.CubeRefractionMapping, function (t) {
                             if (metalEnvTexture = t,
-                                    goldM.envMap = metalEnvTexture,
-                                null !== currRingObj.color)
+                                goldM.envMap = metalEnvTexture,
+                            null !== currRingObj.color)
                                 if (currRingObj.hasOwnProperty("stoneType") && null !== currRingObj.stoneType)
                                     if ("gem" == currRingObj.stoneType) {
                                         var s = "diamond"
-                                            , a = [i + s + ".jpg", i + s + ".jpg", i + s + ".jpg", i + s + ".jpg", i + s + ".jpg", i + s + ".jpg"];
+                                            ,
+                                            a = [i + s + ".jpg", i + s + ".jpg", i + s + ".jpg", i + s + ".jpg", i + s + ".jpg", i + s + ".jpg"];
                                         THREE.ImageUtils.loadTextureCube(a, THREE.CubeRefractionMapping, function (t) {
                                             var i = t;
                                             gemM.envMap = i,
@@ -1557,8 +1600,8 @@ function genJewelryObjects(items, onComplete) {
                     currRingObj.freeGeometry.computeBoundingBox()
             }
             if (currRingObj.position = item.position,
-                null != item.rotation && (currRingObj.rotation = item.rotation),
-                currRingObj.editSelected.length > item.editSelected.length)
+            null != item.rotation && (currRingObj.rotation = item.rotation),
+            currRingObj.editSelected.length > item.editSelected.length)
                 for (var r = 0; r < item.editSelected.length; r++)
                     currRingObj.editSelected[r] = item.editSelected[r],
                     null != item.editName && (currRingObj.editName[r] = item.editName[r]);
@@ -1573,11 +1616,11 @@ function genJewelryObjects(items, onComplete) {
                 currRingObj.asmSelected = item.asmSelected,
                     currRingObj.asmObject = item.asmObject;
             if (null != item.asmName && (currRingObj.asmName = item.asmName),
-                null != item.asmInfo && (currRingObj.asmInfo = item.asmInfo),
-                null != item.asmOptions)
+            null != item.asmInfo && (currRingObj.asmInfo = item.asmInfo),
+            null != item.asmOptions)
                 for (n = currRingObj.asmMarker.length; n < item.asmOptions.length; n++)
                     if (currRingObj.asmOptions.push(item.asmOptions[n]),
-                        "scalar" == item.asmInfo[n].type) {
+                    "scalar" == item.asmInfo[n].type) {
                         if (null != (w = item.asmOptions[n]).path)
                             for (var h = new THREE.CurvePath, l = 0; l < w.path.curves.length; l++) {
                                 var c = w.path.curves[l];
@@ -1598,8 +1641,8 @@ function genJewelryObjects(items, onComplete) {
                     , E = currRingObj.asmOptions[n];
                 if ("scalar" == currRingObj.asmInfo[n].type) {
                     if ((w = E).position = new THREE.Vector3(w.position.x, w.position.y, w.position.z),
-                            w.rotation = new THREE.Vector3(w.rotation.x, w.rotation.y, w.rotation.z),
-                        null == w.path)
+                        w.rotation = new THREE.Vector3(w.rotation.x, w.rotation.y, w.rotation.z),
+                    null == w.path)
                         var y = new THREE.Mesh(d);
                     else
                         y = new THREE.Mesh(BuildCreatePathConnGeometry(w.path));
@@ -1651,8 +1694,8 @@ function genJewelryObjects(items, onComplete) {
                     activeRing.rotation.z = currRingObj.rotation[0].z,
 
                     //ugi
-                    i =0;
-                    activeRingsObjects[i] = currRingObj,
+                    i = 0;
+                activeRingsObjects[i] = currRingObj,
                     activeRings[i] = activeRing,
                 ++activeRingIndex + 1 == items.length && completeAsyncLoop()
             }).catch(function (e) {
@@ -1677,17 +1720,17 @@ function genJewelryObjects(items, onComplete) {
 }
 
 function _get_jszip() {
-    return new Promise(function(a, b) {
-        "undefined" != typeof JSZip && a(), $.when($.getScript("/bower_components/jszip/dist/jszip.min.js"), $.getScript("/bower_components/jszip-utils/dist/jszip-utils.min.js"), $.Deferred(function(a) {
+    return new Promise(function (a, b) {
+        "undefined" != typeof JSZip && a(), $.when($.getScript("/bower_components/jszip/dist/jszip.min.js"), $.getScript("/bower_components/jszip-utils/dist/jszip-utils.min.js"), $.Deferred(function (a) {
             $(a.resolve);
-        })).done(function() {
+        })).done(function () {
             a();
         });
     });
 }
 
 function BuildCreatePathConnGeometry() {
-    
+
 }
 
 function editAsmRing(e) {
@@ -1705,21 +1748,21 @@ function editAsmRing(e) {
                 if (null != t.asmInfo[i].type)
                     var h = t.asmInfo[i].type
             } else
-                n = new THREE.Vector3(0,0,0),
+                n = new THREE.Vector3(0, 0, 0),
                     h = "scalar";
             if ("array" != h ? (null != t.asmOptions[i].path && (activeRingsObjects[a].path = t.asmOptions[i].path),
-                null != t.asmOptions[i].extPath && (activeRingsObjects[a].extPath = t.asmOptions[i].extPath)) : (null != t.asmOptions[i][0].path && (activeRingsObjects[a].path = t.asmOptions[i][0].path),
-                null != t.asmOptions[i][0].extPath && (activeRingsObjects[a].extPath = t.asmOptions[i][0].extPath)),
-                null != t.asmOptions[i].pathPart && (activeRingsObjects[a].pathPart = t.asmOptions[i].pathPart),
-                    activeRingsObjects[a].pathOut = t.asmOptions[i].pathOut,
-                null != t.asmOptions[i].planeCurve && (activeRingsObjects[a].planeCurve = t.asmOptions[i].planeCurve),
-                null != t.asmOptions[i].planeRadius && (activeRingsObjects[a].planeRadius = t.asmOptions[i].planeRadius),
-                    activeRingsObjects[a].buildGeometry(),
-                    activeRingsObjects[a].position = [],
-                    activeRingsObjects[a].rotation = [],
-                    activeRingsObjects[a].scale = [],
-                    activeRingsObjects[a].asmPosition = [],
-                null != activeRingsObjects[a].color) {
+            null != t.asmOptions[i].extPath && (activeRingsObjects[a].extPath = t.asmOptions[i].extPath)) : (null != t.asmOptions[i][0].path && (activeRingsObjects[a].path = t.asmOptions[i][0].path),
+            null != t.asmOptions[i][0].extPath && (activeRingsObjects[a].extPath = t.asmOptions[i][0].extPath)),
+            null != t.asmOptions[i].pathPart && (activeRingsObjects[a].pathPart = t.asmOptions[i].pathPart),
+                activeRingsObjects[a].pathOut = t.asmOptions[i].pathOut,
+            null != t.asmOptions[i].planeCurve && (activeRingsObjects[a].planeCurve = t.asmOptions[i].planeCurve),
+            null != t.asmOptions[i].planeRadius && (activeRingsObjects[a].planeRadius = t.asmOptions[i].planeRadius),
+                activeRingsObjects[a].buildGeometry(),
+                activeRingsObjects[a].position = [],
+                activeRingsObjects[a].rotation = [],
+                activeRingsObjects[a].scale = [],
+                activeRingsObjects[a].asmPosition = [],
+            null != activeRingsObjects[a].color) {
                 if (null != activeRingsObjects[a].stoneType)
                     if ("gem" == activeRingsObjects[a].stoneType)
                         var l = gemM.clone();
@@ -1741,9 +1784,9 @@ function editAsmRing(e) {
             for (var p = 0; p < t.position.length; p++)
                 for (o = 0; o < c; o++) {
                     if (null != activeRingsObjects[a].geometry)
-                        var m = new THREE.Mesh(activeRingsObjects[a].geometry,l);
+                        var m = new THREE.Mesh(activeRingsObjects[a].geometry, l);
                     else
-                        m = new THREE.Mesh(activeRingsObjects[a].drill_geometry,l);
+                        m = new THREE.Mesh(activeRingsObjects[a].drill_geometry, l);
                     if ("array" != h)
                         var d = t.asmOptions[i];
                     else
@@ -1763,11 +1806,13 @@ function editAsmRing(e) {
                         , E = u.size();
                     if (null != d.rotation) {
                         var y = Math.max(E.x * Math.abs(Math.cos(d.rotation.z)), E.y * Math.abs(Math.sin(d.rotation.z)))
-                            , g = Math.max(E.y * Math.abs(Math.cos(d.rotation.z)), E.x * Math.abs(Math.sin(d.rotation.z)));
+                            ,
+                            g = Math.max(E.y * Math.abs(Math.cos(d.rotation.z)), E.x * Math.abs(Math.sin(d.rotation.z)));
                         E.x = y,
                             E.y = g;
                         var T = Math.abs(Math.cos(d.rotation.y)) * Math.min(u.min.x * Math.abs(Math.cos(d.rotation.z)), u.min.y * Math.abs(Math.sin(d.rotation.z)))
-                            , x = Math.min(u.min.y * Math.abs(Math.cos(d.rotation.z)), u.min.x * Math.abs(Math.sin(d.rotation.z)));
+                            ,
+                            x = Math.min(u.min.y * Math.abs(Math.cos(d.rotation.z)), u.min.x * Math.abs(Math.sin(d.rotation.z)));
                         u.min.x = T,
                             u.min.y = x
                     }
@@ -1787,13 +1832,13 @@ function editAsmRing(e) {
                     else
                         v = 0;
                     if (v *= Math.abs(Math.cos(m.rotation.y)),
-                        d.position.x > .001)
+                    d.position.x > .001)
                         w = -u.min.z * Math.sin(Math.abs(m.rotation.y - t.rotation[p].y)) - u.min.x * Math.cos(Math.abs(m.rotation.x - t.rotation[p].x));
                     else if (d.position.x < -.001)
                         w = u.min.z * Math.sin(Math.abs(m.rotation.y - t.rotation[p].y)) + u.min.x * Math.cos(Math.abs(m.rotation.x - t.rotation[p].x));
                     else
                         w = 0;
-                    null != n && (null != activeRingsObjects[a].fix_position ? activeRingsObjects[a].fix_position = new THREE.Vector3(activeRingsObjects[a].fix_position.x || n.x,activeRingsObjects[a].fix_position.y || n.y,activeRingsObjects[a].fix_position.z || n.z) : activeRingsObjects[a].fix_position = new THREE.Vector3(n.x,n.y,n.z)),
+                    null != n && (null != activeRingsObjects[a].fix_position ? activeRingsObjects[a].fix_position = new THREE.Vector3(activeRingsObjects[a].fix_position.x || n.x, activeRingsObjects[a].fix_position.y || n.y, activeRingsObjects[a].fix_position.z || n.z) : activeRingsObjects[a].fix_position = new THREE.Vector3(n.x, n.y, n.z)),
                     null != activeRingsObjects[a].fix_position && (activeRingsObjects[a].fix_position.x && (w = 0),
                     activeRingsObjects[a].fix_position.y && (v = 0),
                     activeRingsObjects[a].fix_position.z && (R = 0)),
@@ -1801,10 +1846,10 @@ function editAsmRing(e) {
                         m.position.y += t.position[p].y + (d.position.y + v) * Math.cos(Math.abs(t.rotation[p].x)) * Math.cos(Math.abs(t.rotation[p].z)) + (d.position.z + R) * Math.sin(Math.abs(t.rotation[p].x)),
                         m.position.x += t.position[p].x + (d.position.x + w) * Math.cos(Math.abs(t.rotation[p].x)) * Math.cos(Math.abs(t.rotation[p].z)) + (d.position.x + w) * Math.sin(Math.abs(t.rotation[p].x)) + (d.position.y + v) * Math.sin(Math.abs(t.rotation[p].z)),
                         mainRing.add(m),
-                        activeRingsObjects[a].position.push(new THREE.Vector3(m.position.x,m.position.y,m.position.z)),
-                        activeRingsObjects[a].rotation.push(new THREE.Vector3(m.rotation.x,m.rotation.y,m.rotation.z)),
-                        activeRingsObjects[a].scale.push(new THREE.Vector3(m.scale.x,m.scale.y,m.scale.z)),
-                        activeRingsObjects[a].asmPosition.push(new THREE.Vector3(d.position.x,d.position.y,d.position.z))
+                        activeRingsObjects[a].position.push(new THREE.Vector3(m.position.x, m.position.y, m.position.z)),
+                        activeRingsObjects[a].rotation.push(new THREE.Vector3(m.rotation.x, m.rotation.y, m.rotation.z)),
+                        activeRingsObjects[a].scale.push(new THREE.Vector3(m.scale.x, m.scale.y, m.scale.z)),
+                        activeRingsObjects[a].asmPosition.push(new THREE.Vector3(d.position.x, d.position.y, d.position.z))
                 }
             activeRings[a] = m,
                 editAsmRing(a)
@@ -1815,139 +1860,139 @@ function editAsmRing(e) {
 function genGemColorTable() {
     gemColor.push({
         base_name: "Red",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark" ],
-        colors: [ 16771818, 16690091, 15841464, 16537688, 14970992, 13534854, 16450564, 14100520, 11881034, 10945283, 9248029, 5505281 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark"],
+        colors: [16771818, 16690091, 15841464, 16537688, 14970992, 13534854, 16450564, 14100520, 11881034, 10945283, 9248029, 5505281]
     }), gemColor.push({
         base_name: "orangey Red",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat" ],
-        colors: [ 16696491, 16550232, 14979952, 16469764, 14179367, 10957827, 16696491, 16550232, 14979952, 16469764, 14179367, 10957827 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat"],
+        colors: [16696491, 16550232, 14979952, 16469764, 14179367, 10957827, 16696491, 16550232, 14979952, 16469764, 14179367, 10957827]
     }), gemColor.push({
         base_name: "reddish Orange",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark" ],
-        colors: [ 16774378, 16700843, 15914939, 16558680, 14985840, 13544070, 16482308, 14188583, 11960393, 10966275, 9262365, 5516033 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark"],
+        colors: [16774378, 16700843, 15914939, 16558680, 14985840, 13544070, 16482308, 14188583, 11960393, 10966275, 9262365, 5516033]
     }), gemColor.push({
         base_name: "Orange",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat" ],
-        colors: [ 16705195, 16567128, 14991728, 16494596, 14197543, 10974723, 16705195, 16567128, 14991728, 16494596, 14197543, 10974723 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat"],
+        colors: [16705195, 16567128, 14991728, 16494596, 14197543, 10974723, 16705195, 16567128, 14991728, 16494596, 14197543, 10974723]
     }), gemColor.push({
         base_name: "orangey Yellow",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat" ],
-        colors: [ 16709035, 16575576, 14997872, 16507396, 14206503, 10983171, 16709035, 16575576, 14997872, 16507396, 14206503, 10983171 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat"],
+        colors: [16709035, 16575576, 14997872, 16507396, 14206503, 10983171, 16709035, 16575576, 14997872, 16507396, 14206503, 10983171]
     }), gemColor.push({
         base_name: "Yellow",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark" ],
-        colors: [ 16777185, 16711339, 15856056, 16579672, 15000688, 13553286, 16513796, 14211111, 11974217, 10987267, 9276701, 5526529 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark"],
+        colors: [16777185, 16711339, 15856056, 16579672, 15000688, 13553286, 16513796, 14211111, 11974217, 10987267, 9276701, 5526529]
     }), gemColor.push({
         base_name: "greenish Yellow",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat" ],
-        colors: [ 16121515, 15531096, 14279792, 14875396, 13031463, 9938691, 16121515, 15531096, 14279792, 14875396, 13031463, 9938691 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat"],
+        colors: [16121515, 15531096, 14279792, 14875396, 13031463, 9938691, 16121515, 15531096, 14279792, 14875396, 13031463, 9938691]
     }), gemColor.push({
         base_name: "yellowish Green",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark" ],
-        colors: [ 16318433, 15400619, 14938552, 13892696, 13165680, 12373638, 12450564, 11327527, 10204745, 8300291, 7507229, 4215809 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark"],
+        colors: [16318433, 15400619, 14938552, 13892696, 13165680, 12373638, 12450564, 11327527, 10204745, 8300291, 7507229, 4215809]
     }), gemColor.push({
         base_name: "slightly yellowish Green",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat" ],
-        colors: [ 14024363, 11205720, 11199600, 8452868, 8443943, 5613315, 14024363, 11205720, 11199600, 8452868, 8443943, 5613315 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat"],
+        colors: [14024363, 11205720, 11199600, 8452868, 8443943, 5613315, 14024363, 11205720, 11199600, 8452868, 8443943, 5613315]
     }), gemColor.push({
         base_name: "Green",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark" ],
-        colors: [ 15400938, 11271851, 12120504, 5831768, 7398512, 8834694, 326404, 2611239, 4830793, 239363, 1936669, 87041 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark"],
+        colors: [15400938, 11271851, 12120504, 5831768, 7398512, 8834694, 326404, 2611239, 4830793, 239363, 1936669, 87041]
     }), gemColor.push({
         base_name: "slightly bluish Green",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark" ],
-        colors: [ 15400948, 11271893, 12120533, 5831850, 7398570, 8834730, 326528, 2611328, 4830848, 239445, 1936725, 87083 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark"],
+        colors: [15400948, 11271893, 12120533, 5831850, 7398570, 8834730, 326528, 2611328, 4830848, 239445, 1936725, 87083]
     }), gemColor.push({
         base_name: "bluish Green",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat" ],
-        colors: [ 11271917, 5831899, 7398605, 326602, 2611381, 239494, 11271917, 5831899, 7398605, 326602, 2611381, 239494 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat"],
+        colors: [11271917, 5831899, 7398605, 326602, 2611381, 239494, 11271917, 5831899, 7398605, 326602, 2611381, 239494]
     }), gemColor.push({
         base_name: "strongly bluish Green",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark" ],
-        colors: [ 15400959, 11271934, 12120561, 5831932, 7398628, 8834766, 326651, 2611416, 4830902, 239527, 1936781, 87124 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark"],
+        colors: [15400959, 11271934, 12120561, 5831932, 7398628, 8834766, 326651, 2611416, 4830902, 239527, 1936781, 87124]
     }), gemColor.push({
         base_name: "Green-Blue",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat" ],
-        colors: [ 11268606, 5825532, 7394276, 317179, 2604504, 233127, 11268606, 5825532, 7394276, 317179, 2604504, 233127 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat"],
+        colors: [11268606, 5825532, 7394276, 317179, 2604504, 233127, 11268606, 5825532, 7394276, 317179, 2604504, 233127]
     }), gemColor.push({
         base_name: "strongly greenish Blue",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark" ],
-        colors: [ 15398911, 11263486, 12114673, 5815036, 7386852, 8827342, 301307, 2593496, 4819638, 222631, 1925517, 78676 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark"],
+        colors: [15398911, 11263486, 12114673, 5815036, 7386852, 8827342, 301307, 2593496, 4819638, 222631, 1925517, 78676]
     }), gemColor.push({
         base_name: "slightly greenish Blue",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat" ],
-        colors: [ 11257086, 5802492, 7377892, 282619, 2579672, 210087, 11257086, 5802492, 7377892, 282619, 2579672, 210087 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat"],
+        colors: [11257086, 5802492, 7377892, 282619, 2579672, 210087, 11257086, 5802492, 7377892, 282619, 2579672, 210087]
     }), gemColor.push({
         base_name: "Blue",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark" ],
-        colors: [ 15395583, 11250686, 12105969, 5789948, 7368932, 8816334, 263419, 2566104, 4802998, 197543, 1908109, 65876 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark"],
+        colors: [15395583, 11250686, 12105969, 5789948, 7368932, 8816334, 263419, 2566104, 4802998, 197543, 1908109, 65876]
     }), gemColor.push({
         base_name: "violetish Blue",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat" ],
-        colors: [ 13413374, 10115324, 10383588, 6751483, 7153369, 4522919, 13413374, 10115324, 10383588, 6751483, 7153369, 4522919 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat"],
+        colors: [13413374, 10115324, 10383588, 6751483, 7153369, 4522919, 13413374, 10115324, 10383588, 6751483, 7153369, 4522919]
     }), gemColor.push({
         base_name: "bluish Violet",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark" ],
-        colors: [ 16313087, 14789630, 14530801, 12736764, 12349668, 11896526, 10814715, 10102744, 9390518, 7144359, 6692237, 3604820 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark"],
+        colors: [16313087, 14789630, 14530801, 12736764, 12349668, 11896526, 10814715, 10102744, 9390518, 7144359, 6692237, 3604820]
     }), gemColor.push({
         base_name: "Violet",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat" ],
-        colors: [ 15576062, 14375164, 13463780, 13239547, 11872216, 8782759, 15576062, 14375164, 13463780, 13239547, 11872216, 8782759 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat"],
+        colors: [15576062, 14375164, 13463780, 13239547, 11872216, 8782759, 15576062, 14375164, 13463780, 13239547, 11872216, 8782759]
     }), gemColor.push({
         base_name: "bluish Purple",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat" ],
-        colors: [ 16428030, 15948028, 14643428, 15598843, 13576152, 10355623, 16428030, 15948028, 14643428, 15598843, 13576152, 10355623 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med dark, strong sat"],
+        colors: [16428030, 15948028, 14643428, 15598843, 13576152, 10355623, 16428030, 15948028, 14643428, 15598843, 13576152, 10355623]
     }), gemColor.push({
         base_name: "Purple",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark" ],
-        colors: [ 16771837, 16690165, 15841516, 16537836, 14971097, 13534919, 16450786, 14165958, 11946411, 10945431, 9248130, 5505355 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly greyish sat", "med light, strong sat", "med light, very slightly greyish sat", "med light, slightly greyish sat", "med, strong sat", "med, very slightly greyish sat", "med, slightly greyish sat", "med dark, strong sat", "med dark, very slightly greyish sat", "dark"],
+        colors: [16771837, 16690165, 15841516, 16537836, 14971097, 13534919, 16450786, 14165958, 11946411, 10945431, 9248130, 5505355]
     }), gemColor.push({
         base_name: "reddish Purple",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat" ],
-        colors: [ 16690145, 16537794, 14971068, 16450725, 14165914, 10945389, 16690145, 16537794, 14971068, 16450725, 14165914, 10945389 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat"],
+        colors: [16690145, 16537794, 14971068, 16450725, 14165914, 10945389, 16690145, 16537794, 14971068, 16450725, 14165914, 10945389]
     }), gemColor.push({
         base_name: "strongly purplish Red",
-        tone_names: [ "very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark" ],
-        colors: [ 16771827, 16690128, 15841489, 16537762, 14971045, 13534887, 16450675, 14165879, 11946362, 10945357, 9248080, 5505318 ]
+        tone_names: ["very light", "light, strong sat", "light, very slightly brownish sat", "med light, strong sat", "med light, very slightly brownish sat", "med light, slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med, slightly brownish sat", "med dark, strong sat", "med dark, very slightly brownish sat", "dark"],
+        colors: [16771827, 16690128, 15841489, 16537762, 14971045, 13534887, 16450675, 14165879, 11946362, 10945357, 9248080, 5505318]
     }), gemColor.push({
         base_name: "slightly purplish Red",
-        tone_names: [ "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat" ],
-        colors: [ 16690112, 16537730, 14971021, 16450626, 14165844, 10945325, 16690112, 16537730, 14971021, 16450626, 14165844, 10945325 ]
+        tone_names: ["light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat", "light, strong sat", "med light, strong sat", "med light, very slightly brownish sat", "med, strong sat", "med, very slightly brownish sat", "med dark, strong sat"],
+        colors: [16690112, 16537730, 14971021, 16450626, 14165844, 10945325, 16690112, 16537730, 14971021, 16450626, 14165844, 10945325]
     }), gemColor.push({
         base_name: "Grey",
-        tone_names: [ "vey light grey", "light grey", "medium light grey", "grey", "medium dark grey", "dark grey", "vey light grey", "light grey", "medium light grey", "grey", "medium dark grey", "dark grey" ],
-        colors: [ 16053492, 13948116, 11184810, 8355711, 5592405, 2763306, 16053492, 13948116, 11184810, 8355711, 5592405, 2763306 ]
+        tone_names: ["vey light grey", "light grey", "medium light grey", "grey", "medium dark grey", "dark grey", "vey light grey", "light grey", "medium light grey", "grey", "medium dark grey", "dark grey"],
+        colors: [16053492, 13948116, 11184810, 8355711, 5592405, 2763306, 16053492, 13948116, 11184810, 8355711, 5592405, 2763306]
     }), gemColor.push({
         base_name: "Normal diamond",
-        tone_names: [ "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Z" ],
-        colors: [ 16777205, 16777195, 16777179, 16777163, 16777153, 16777143, 16777133, 16777123, 16777113, 16777103, 16777093, 16777083 ]
+        tone_names: ["D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Z"],
+        colors: [16777205, 16777195, 16777179, 16777163, 16777153, 16777143, 16777133, 16777123, 16777113, 16777103, 16777093, 16777083]
     });
 }
 
 function genPearlTable() {
     pearlTable.push({
         type: "Akoya",
-        shapes: [ "round", "baroque" ],
-        sizes: [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ],
-        colors: [ 13948116, 16777164, 16119040, 16218273, 2839678, 16761035, 6290199 ],
-        color_names: [ "white", "cream", "yellow", "pink", "blue", "rose", "green" ]
+        shapes: ["round", "baroque"],
+        sizes: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        colors: [13948116, 16777164, 16119040, 16218273, 2839678, 16761035, 6290199],
+        color_names: ["white", "cream", "yellow", "pink", "blue", "rose", "green"]
     }), pearlTable.push({
         type: "South sea",
-        shapes: [ "round", "oval", "button", "drop", "baroque" ],
-        sizes: [ 8, 9, 10, 11, 12, 13, 15, 17, 20 ],
-        colors: [ 13948116, 16777164, 12632256, 16119040, 13934615, 2839678, 16761035, 6290199 ],
-        color_names: [ "white", "cream", "silver", "yellow", "orange", "blue", "pink", "green" ]
+        shapes: ["round", "oval", "button", "drop", "baroque"],
+        sizes: [8, 9, 10, 11, 12, 13, 15, 17, 20],
+        colors: [13948116, 16777164, 12632256, 16119040, 13934615, 2839678, 16761035, 6290199],
+        color_names: ["white", "cream", "silver", "yellow", "orange", "blue", "pink", "green"]
     }), pearlTable.push({
         type: "Tahitian",
-        shapes: [ "round", "oval", "button", "drop", "baroque" ],
-        sizes: [ 9, 10, 11, 12, 13, 14 ],
-        colors: [ 788746, 7565166, 2824983, 5146997, 5126270, 13433693 ],
-        color_names: [ "black", "grey", "brown", "bluish green", "purple", "yellowish green" ]
+        shapes: ["round", "oval", "button", "drop", "baroque"],
+        sizes: [9, 10, 11, 12, 13, 14],
+        colors: [788746, 7565166, 2824983, 5146997, 5126270, 13433693],
+        color_names: ["black", "grey", "brown", "bluish green", "purple", "yellowish green"]
     }), pearlTable.push({
         type: "Freshwater",
-        shapes: [ "round", "oval", "button", "baroque" ],
-        sizes: [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
-        colors: [ 13948116, 16777164, 16774016, 15103057, 16146603, 7089607 ],
-        color_names: [ "white", "cream", "yellowish orange", "pink", "purple", "blue" ]
+        shapes: ["round", "oval", "button", "baroque"],
+        sizes: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+        colors: [13948116, 16777164, 16774016, 15103057, 16146603, 7089607],
+        color_names: ["white", "cream", "yellowish orange", "pink", "purple", "blue"]
     });
 }

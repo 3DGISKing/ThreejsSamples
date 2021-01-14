@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>three.js webgl - Simple text from json</title>
+    <title>Dynamic Text Ring</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script src="scripts/threejs-all-71-min.js"></script>
     <script src="scripts/jquery.min.js"></script>
@@ -17,61 +17,40 @@
             margin: 0;
             overflow: hidden;
         }
-
-        #info {
-            position: absolute;
-            top: 10px;
-            width: 100%;
-            text-align: center;
-            z-index: 100;
-            display: block;
-        }
-
-        #loading {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            position: fixed;
-            display: block;
-            opacity: 0.7;
-            background-color: #fff;
-            z-index: 99;
-            text-align: center;
-        }
-
-        #loading-image {
-            position: absolute;
-            top: 30%;
-            left: 40%;
-            z-index: 100;
-        }
-
     </style>
 </head>
 <body>
 
-
 <div id="sds-entry">
     <div data-reactroot="" class="sds-workbench">
-        <div class="refresh-indicator" id = "refreshDiv"><!-- react-text: 231 --> <!-- /react-text -->
-            <img  src="dist/giphy.gif" alt="Loading..." />
-        <!-- react-text: 236 --> <!-- /react-text --></div>
+        <div class="refresh-indicator" id="refreshDiv"><!-- react-text: 231 --> <!-- /react-text -->
+            <img src="dist/giphy.gif" alt="Loading..."/>
+            <!-- react-text: 236 --> <!-- /react-text --></div>
         <div class="sds-events"></div>
         <!-- react-text: 104 --><!-- /react-text -->
         <div class="rightnav ">
             <div class="edits">
-                <div class="op-card" style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; z-index: 1;">
+                <div class="op-card"
+                     style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; z-index: 1;">
                     <div style="padding-bottom: 0px;">
-                        <div class="op-header-title" disabled="" style="padding: 16px; font-weight: 500; box-sizing: border-box; position: relative; white-space: nowrap; text-transform: capitalize; display: none">
-                            <div style="display: inline-block; vertical-align: top; white-space: normal; padding-right: 90px;"><span style="color: rgba(0, 0, 0, 0.87); display: block; font-size: 15px;"></span><span style="color: rgba(0, 0, 0, 0.54); display: block; font-size: 14px;">Name ring</span></div>
+                        <div class="op-header-title" disabled=""
+                             style="padding: 16px; font-weight: 500; box-sizing: border-box; position: relative; white-space: nowrap; text-transform: capitalize; display: none">
+                            <div style="display: inline-block; vertical-align: top; white-space: normal; padding-right: 90px;">
+                                <span style="color: rgba(0, 0, 0, 0.87); display: block; font-size: 15px;"></span><span
+                                    style="color: rgba(0, 0, 0, 0.54); display: block; font-size: 14px;">Name ring</span>
+                            </div>
                         </div>
                         <div style="padding: 8px; position: relative;">
                             <div style="margin-right: 8px;">
                                 <div>
                                     <hr style="margin: -1px 0px 0px; height: 1px; border: none; background-color: rgb(224, 224, 224);">
-                                    <button tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; height: 36px; line-height: 36px; min-width: 88px; color: rgb(93, 90, 88); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 2px; user-select: none; overflow: hidden; background-color: rgba(0, 0, 0, 0); text-align: center;"  onclick = "changeText()">
-                                        <div><span style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; overflow: hidden; pointer-events: none; z-index: 1;"></span><span style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; font-size: 14px;">text change</span></div>
+                                    <button tabindex="0" type="button"
+                                            style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; height: 36px; line-height: 36px; min-width: 88px; color: rgb(93, 90, 88); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; border-radius: 2px; user-select: none; overflow: hidden; background-color: rgba(0, 0, 0, 0); text-align: center;"
+                                            onclick="changeText()">
+                                        <div><span
+                                                style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; overflow: hidden; pointer-events: none; z-index: 1;"></span><span
+                                                style="position: relative; padding-left: 16px; padding-right: 16px; vertical-align: middle; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; font-size: 14px;">text change</span>
+                                        </div>
                                     </button>
                                 </div>
                             </div>
@@ -79,13 +58,16 @@
                                 <div>
                                     <hr style="margin: -1px 0px 0px; height: 1px; border: none; background-color: rgb(224, 224, 224);">
                                     <p class="op-card-header-m">ring depth</p>
-                                    <div class="op-menu" style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                    <div class="op-menu"
+                                         style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                         <div style="cursor: pointer; height: 100%; position: relative; width: 100%;">
                                             <div style="box-sizing: border-box; content: &quot; &quot;; display: table;"></div>
                                             <div style="color: rgba(0, 0, 0, 0.87); height: 56px; line-height: 56px; overflow: hidden; opacity: 1; position: relative; padding-left: 24px; padding-right: 56px; text-overflow: ellipsis; top: 0px; white-space: nowrap;">0.9</div>
-                                            <button tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
+                                            <button tabindex="0" type="button"
+                                                    style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
                                                 <div>
-                                                    <svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                                    <svg viewBox="0 0 24 24"
+                                                         style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                                         <path d="M7 10l5 5 5-5z"></path>
                                                     </svg>
                                                 </div>
@@ -94,7 +76,7 @@
                                             <div style="box-sizing: border-box; content: &quot; &quot;; clear: both; display: table;"></div>
                                         </div>
                                         <div style="display: none;">
-                                            <!-- react-empty: 133 --><!-- react-empty: 134 -->
+
                                         </div>
                                     </div>
                                 </div>
@@ -103,13 +85,17 @@
                                 <div>
                                     <hr style="margin: -1px 0px 0px; height: 1px; border: none; background-color: rgb(224, 224, 224);">
                                     <p class="op-card-header-m">ring diameter</p>
-                                    <div class="op-menu" style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                    <div class="op-menu"
+                                         style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                         <div style="cursor: pointer; height: 100%; position: relative; width: 100%;">
                                             <div style="box-sizing: border-box; content: &quot; &quot;; display: table;"></div>
-                                            <div style="color: rgba(0, 0, 0, 0.87); height: 56px; line-height: 56px; overflow: hidden; opacity: 1; position: relative; padding-left: 24px; padding-right: 56px; text-overflow: ellipsis; top: 0px; white-space: nowrap;">US 8</div>
-                                            <button tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
+                                            <div style="color: rgba(0, 0, 0, 0.87); height: 56px; line-height: 56px; overflow: hidden; opacity: 1; position: relative; padding-left: 24px; padding-right: 56px; text-overflow: ellipsis; top: 0px; white-space: nowrap;">US
+                                            8</div>
+                                            <button tabindex="0" type="button"
+                                                    style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
                                                 <div>
-                                                    <svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                                    <svg viewBox="0 0 24 24"
+                                                         style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                                         <path d="M7 10l5 5 5-5z"></path>
                                                     </svg>
                                                 </div>
@@ -118,7 +104,7 @@
                                             <div style="box-sizing: border-box; content: &quot; &quot;; clear: both; display: table;"></div>
                                         </div>
                                         <div style="display: none;">
-                                            <!-- react-empty: 150 --><!-- react-empty: 151 -->
+
                                         </div>
                                     </div>
                                 </div>
@@ -127,13 +113,16 @@
                                 <div>
                                     <hr style="margin: -1px 0px 0px; height: 1px; border: none; background-color: rgb(224, 224, 224);">
                                     <p class="op-card-header-m">ring height</p>
-                                    <div class="op-menu" style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                    <div class="op-menu"
+                                         style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                         <div style="cursor: pointer; height: 100%; position: relative; width: 100%;">
                                             <div style="box-sizing: border-box; content: &quot; &quot;; display: table;"></div>
                                             <div style="color: rgba(0, 0, 0, 0.87); height: 56px; line-height: 56px; overflow: hidden; opacity: 1; position: relative; padding-left: 24px; padding-right: 56px; text-overflow: ellipsis; top: 0px; white-space: nowrap;">3</div>
-                                            <button tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
+                                            <button tabindex="0" type="button"
+                                                    style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
                                                 <div>
-                                                    <svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                                    <svg viewBox="0 0 24 24"
+                                                         style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                                         <path d="M7 10l5 5 5-5z"></path>
                                                     </svg>
                                                 </div>
@@ -142,7 +131,7 @@
                                             <div style="box-sizing: border-box; content: &quot; &quot;; clear: both; display: table;"></div>
                                         </div>
                                         <div style="display: none;">
-                                            <!-- react-empty: 167 --><!-- react-empty: 168 -->
+
                                         </div>
                                     </div>
                                 </div>
@@ -151,13 +140,16 @@
                                 <div>
                                     <hr style="margin: -1px 0px 0px; height: 1px; border: none; background-color: rgb(224, 224, 224);">
                                     <p class="op-card-header-m">name size</p>
-                                    <div class="op-menu" style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                    <div class="op-menu"
+                                         style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                         <div style="cursor: pointer; height: 100%; position: relative; width: 100%;">
                                             <div style="box-sizing: border-box; content: &quot; &quot;; display: table;"></div>
                                             <div style="color: rgba(0, 0, 0, 0.87); height: 56px; line-height: 56px; overflow: hidden; opacity: 1; position: relative; padding-left: 24px; padding-right: 56px; text-overflow: ellipsis; top: 0px; white-space: nowrap;">10</div>
-                                            <button tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
+                                            <button tabindex="0" type="button"
+                                                    style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
                                                 <div>
-                                                    <svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                                    <svg viewBox="0 0 24 24"
+                                                         style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                                         <path d="M7 10l5 5 5-5z"></path>
                                                     </svg>
                                                 </div>
@@ -166,7 +158,7 @@
                                             <div style="box-sizing: border-box; content: &quot; &quot;; clear: both; display: table;"></div>
                                         </div>
                                         <div style="display: none;">
-                                            <!-- react-empty: 184 --><!-- react-empty: 185 -->
+
                                         </div>
                                     </div>
                                 </div>
@@ -175,13 +167,16 @@
                                 <div>
                                     <hr style="margin: -1px 0px 0px; height: 1px; border: none; background-color: rgb(224, 224, 224);">
                                     <p class="op-card-header-m">ring section</p>
-                                    <div class="op-menu" style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                    <div class="op-menu"
+                                         style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                         <div style="cursor: pointer; height: 100%; position: relative; width: 100%;">
                                             <div style="box-sizing: border-box; content: &quot; &quot;; display: table;"></div>
                                             <div style="color: rgba(0, 0, 0, 0.87); height: 56px; line-height: 56px; overflow: hidden; opacity: 1; position: relative; padding-left: 24px; padding-right: 56px; text-overflow: ellipsis; top: 0px; white-space: nowrap;">edgeless</div>
-                                            <button tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
+                                            <button tabindex="0" type="button"
+                                                    style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
                                                 <div>
-                                                    <svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                                    <svg viewBox="0 0 24 24"
+                                                         style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                                         <path d="M7 10l5 5 5-5z"></path>
                                                     </svg>
                                                 </div>
@@ -190,7 +185,7 @@
                                             <div style="box-sizing: border-box; content: &quot; &quot;; clear: both; display: table;"></div>
                                         </div>
                                         <div style="display: none;">
-                                            <!-- react-empty: 201 --><!-- react-empty: 202 -->
+
                                         </div>
                                     </div>
                                 </div>
@@ -199,13 +194,16 @@
                                 <div>
                                     <hr style="margin: -1px 0px 0px; height: 1px; border: none; background-color: rgb(224, 224, 224);">
                                     <p class="op-card-header-m">shank type</p>
-                                    <div class="op-menu" style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                    <div class="op-menu"
+                                         style="display: inline-block; font-size: 15px; height: 48px; font-family: Roboto, sans-serif; outline: none; position: relative; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                         <div style="cursor: pointer; height: 100%; position: relative; width: 100%;">
                                             <div style="box-sizing: border-box; content: &quot; &quot;; display: table;"></div>
                                             <div style="color: rgba(0, 0, 0, 0.87); height: 56px; line-height: 56px; overflow: hidden; opacity: 1; position: relative; padding-left: 24px; padding-right: 56px; text-overflow: ellipsis; top: 0px; white-space: nowrap;">split</div>
-                                            <button tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
+                                            <button tabindex="0" type="button"
+                                                    style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 12px; outline: none; font-size: 0px; font-weight: inherit; position: absolute; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 48px; height: 48px; fill: rgb(224, 224, 224); right: 16px; top: 4px; background: none;">
                                                 <div>
-                                                    <svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                                    <svg viewBox="0 0 24 24"
+                                                         style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: inherit; height: 24px; width: 24px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                                         <path d="M7 10l5 5 5-5z"></path>
                                                     </svg>
                                                 </div>
@@ -214,7 +212,7 @@
                                             <div style="box-sizing: border-box; content: &quot; &quot;; clear: both; display: table;"></div>
                                         </div>
                                         <div style="display: none;">
-                                            <!-- react-empty: 218 --><!-- react-empty: 219 -->
+
                                         </div>
                                     </div>
                                 </div>
@@ -227,18 +225,25 @@
         <div class="leftnav">
             <div class="others">
                 <div class="zoom-buttons-container">
-                    <div class="op-header" style="box-sizing: border-box; color: rgba(0, 0, 0, 0.54); font-size: 14px; font-weight: 500; line-height: 48px; padding-left: 16px; width: 100%;"></div>
+                    <div class="op-header"
+                         style="box-sizing: border-box; color: rgba(0, 0, 0, 0.54); font-size: 14px; font-weight: 500; line-height: 48px; padding-left: 16px; width: 100%;"></div>
                     <div class="zoombuttons">
-                        <button class="zoominbtn" tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 16px; outline: none; font-size: 0px; font-weight: inherit; position: relative; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 72px; height: 72px; background: none;" onclick ="ZoomInPressed()">
+                        <button class="zoominbtn" tabindex="0" type="button"
+                                style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 16px; outline: none; font-size: 0px; font-weight: inherit; position: relative; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 72px; height: 72px; background: none;"
+                                onclick="ZoomInPressed()">
                             <div>
-                                <svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: currentcolor; height: 36px; width: 36px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                <svg viewBox="0 0 24 24"
+                                     style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: currentcolor; height: 36px; width: 36px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"></path>
                                 </svg>
                             </div>
                         </button>
-                        <button class="zoomoutbtn" tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 16px; outline: none; font-size: 0px; font-weight: inherit; position: relative; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 72px; height: 72px; background: none;" onclick ="ZoomOutPressed()">
+                        <button class="zoomoutbtn" tabindex="0" type="button"
+                                style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 16px; outline: none; font-size: 0px; font-weight: inherit; position: relative; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 72px; height: 72px; background: none;"
+                                onclick="ZoomOutPressed()">
                             <div>
-                                <svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: currentcolor; height: 36px; width: 36px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                                <svg viewBox="0 0 24 24"
+                                     style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: currentcolor; height: 36px; width: 36px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"></path>
                                 </svg>
                             </div>
@@ -249,57 +254,72 @@
         </div>
         <div class="mobilebuttons ">
             <div style="position: fixed; left: 50%; display: flex; bottom: 0px; z-index: 2900; visibility: hidden; transform: translate(-50%, 48px); transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, visibility 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
-                <div width="1" style="font-family: Roboto, sans-serif; background-color: rgba(0, 0, 0, 0.87); padding: 0px 24px; height: 48px; line-height: 48px; border-radius: 0px; max-width: inherit; min-width: inherit; width: calc(100vw - 48px); flex-grow: 1;">
-                    <div style="font-size: 14px; color: rgb(255, 255, 255); opacity: 0; transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;"><span>Saving Model</span></div>
+                <div width="1"
+                     style="font-family: Roboto, sans-serif; background-color: rgba(0, 0, 0, 0.87); padding: 0px 24px; height: 48px; line-height: 48px; border-radius: 0px; max-width: inherit; min-width: inherit; width: calc(100vw - 48px); flex-grow: 1;">
+                    <div style="font-size: 14px; color: rgb(255, 255, 255); opacity: 0; transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                        <span>Saving Model</span></div>
                 </div>
             </div>
             <div class="editbtn ">
                 <div style="display: inline-block; position: relative;">
-                    <div class="button-main" style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; display: inline-block; min-width: 88px;">
-                        <a tabindex="0" href="javascript:void(0)" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; vertical-align: middle; height: 36px; line-height: 36px; width: 100%; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; background-color: rgb(255, 255, 255); text-align: center;">
+                    <div class="button-main"
+                         style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255); transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; box-sizing: border-box; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px; border-radius: 2px; display: inline-block; min-width: 88px;">
+                        <a tabindex="0" href="javascript:void(0)"
+                           style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 0px; outline: none; font-size: inherit; font-weight: inherit; position: relative; vertical-align: middle; height: 36px; line-height: 36px; width: 100%; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; background-color: rgb(255, 255, 255); text-align: center;">
                             <div>
-                                <div style="height: 36px; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; top: 0px;"><span style="position: relative; opacity: 1; font-size: 14px; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; margin: 0px; user-select: none; padding-left: 16px; padding-right: 16px; color: rgba(0, 0, 0, 0.87);">customize</span></div>
+                                <div style="height: 36px; border-radius: 2px; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; top: 0px;">
+                                    <span style="position: relative; opacity: 1; font-size: 14px; letter-spacing: 0px; text-transform: uppercase; font-weight: 500; margin: 0px; user-select: none; padding-left: 16px; padding-right: 16px; color: rgba(0, 0, 0, 0.87);">customize</span>
+                                </div>
                             </div>
                         </a>
                     </div>
                     <div style="display: none;">
-                        <!-- react-empty: 66 --><!-- react-empty: 67 -->
+
                     </div>
                 </div>
             </div>
             <div class="zoombuttons">
-                <button class="zoominbtn" tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 16px; outline: none; font-size: 0px; font-weight: inherit; position: relative; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 72px; height: 72px; background: none;">
+                <button class="zoominbtn" tabindex="0" type="button"
+                        style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 16px; outline: none; font-size: 0px; font-weight: inherit; position: relative; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 72px; height: 72px; background: none;">
                     <div>
-                        <svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: currentcolor; height: 36px; width: 36px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                        <svg viewBox="0 0 24 24"
+                             style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: currentcolor; height: 36px; width: 36px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                             <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"></path>
                         </svg>
                     </div>
                 </button>
-                <button class="zoomoutbtn" tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 16px; outline: none; font-size: 0px; font-weight: inherit; position: relative; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 72px; height: 72px; background: none;">
+                <button class="zoomoutbtn" tabindex="0" type="button"
+                        style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 16px; outline: none; font-size: 0px; font-weight: inherit; position: relative; overflow: visible; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; width: 72px; height: 72px; background: none;">
                     <div>
-                        <svg viewBox="0 0 24 24" style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: currentcolor; height: 36px; width: 36px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                        <svg viewBox="0 0 24 24"
+                             style="display: inline-block; color: rgba(0, 0, 0, 0.87); fill: currentcolor; height: 36px; width: 36px; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                             <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"></path>
                         </svg>
                     </div>
                 </button>
             </div>
-            <div class="bottombar" style="position: relative; width: 100%; display: flex; justify-content: center; background-color: rgb(255, 255, 255); height: 56px;">
+            <div class="bottombar"
+                 style="position: relative; width: 100%; display: flex; justify-content: center; background-color: rgb(255, 255, 255); height: 56px;">
                 <div class="materialmenu hidden" style="flex: 1 1 0%;">
-                    <button tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 8px 12px 10px; outline: none; font-size: inherit; font-weight: inherit; position: relative; transition: padding-top 0.3s; min-width: 80px; max-width: 168px; background: none;">
+                    <button tabindex="0" type="button"
+                            style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 8px 12px 10px; outline: none; font-size: inherit; font-weight: inherit; position: relative; transition: padding-top 0.3s; min-width: 80px; max-width: 168px; background: none;">
                         <div>
-                            <svg viewBox="0 0 24 24" style="display: block; color: rgba(0, 0, 0, 0.87); fill: rgba(0, 0, 0, 0.54); height: 24px; width: 100%; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                            <svg viewBox="0 0 24 24"
+                                 style="display: block; color: rgba(0, 0, 0, 0.87); fill: rgba(0, 0, 0, 0.54); height: 24px; width: 100%; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                                 <path d="M20.71 5.63l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-3.12 3.12-1.93-1.91-1.41 1.41 1.42 1.42L3 16.25V21h4.75l8.92-8.92 1.42 1.42 1.41-1.41-1.92-1.92 3.12-3.12c.4-.4.4-1.03.01-1.42zM6.92 19L5 17.08l8.06-8.06 1.92 1.92L6.92 19z"></path>
                             </svg>
                             <div style="font-size: 12px; transition: color 0.3s, font-size 0.3s; color: rgba(0, 0, 0, 0.54);">Color</div>
                         </div>
                     </button>
                     <div style="display: none;">
-                        <!-- react-empty: 85 --><!-- react-empty: 86 -->
+
                     </div>
                 </div>
-                <button class="savebutton hidden" tabindex="0" type="button" style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 8px 12px 10px; outline: none; font-size: inherit; font-weight: inherit; position: relative; transition: padding-top 0.3s; min-width: 80px; max-width: 168px; flex: 1 1 0%; background: none;">
+                <button class="savebutton hidden" tabindex="0" type="button"
+                        style="border: 10px; box-sizing: border-box; display: inline-block; font-family: Roboto, sans-serif; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: pointer; text-decoration: none; margin: 0px; padding: 8px 12px 10px; outline: none; font-size: inherit; font-weight: inherit; position: relative; transition: padding-top 0.3s; min-width: 80px; max-width: 168px; flex: 1 1 0%; background: none;">
                     <div>
-                        <svg viewBox="0 0 24 24" style="display: block; color: rgba(0, 0, 0, 0.87); fill: rgba(0, 0, 0, 0.54); height: 24px; width: 100%; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                        <svg viewBox="0 0 24 24"
+                             style="display: block; color: rgba(0, 0, 0, 0.87); fill: rgba(0, 0, 0, 0.54); height: 24px; width: 100%; user-select: none; transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
                             <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"></path>
                         </svg>
                         <div style="font-size: 12px; transition: color 0.3s, font-size 0.3s; color: rgba(0, 0, 0, 0.54);">Save</div>
@@ -310,127 +330,114 @@
         <div class="savedialog">
             <!-- react-empty: 93 -->
             <div style="position: fixed; left: 50%; display: flex; bottom: 0px; z-index: 2900; visibility: hidden; transform: translate(-50%, 48px); transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, visibility 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
-                <div width="1" style="font-family: Roboto, sans-serif; background-color: rgba(0, 0, 0, 0.87); padding: 0px 24px; height: 48px; line-height: 48px; border-radius: 0px; max-width: inherit; min-width: inherit; width: calc(100vw - 48px); flex-grow: 1;">
-                    <div style="font-size: 14px; color: rgb(255, 255, 255); opacity: 0; transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;"><span>updating</span></div>
+                <div width="1"
+                     style="font-family: Roboto, sans-serif; background-color: rgba(0, 0, 0, 0.87); padding: 0px 24px; height: 48px; line-height: 48px; border-radius: 0px; max-width: inherit; min-width: inherit; width: calc(100vw - 48px); flex-grow: 1;">
+                    <div style="font-size: 14px; color: rgb(255, 255, 255); opacity: 0; transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;">
+                        <span>updating</span></div>
                 </div>
             </div>
         </div>
         <div class="edittext">
-            <!-- react-empty: 97 -->
+
         </div>
     </div>
 </div>
 
-    <script>
-        var boot_options = {};
+<script>
+    var boot_options = {};
 
-        function ViewPressedInline(onSuccess) {
-            var d = wg.sds_model;
+    function ViewPressedInline(onSuccess) {
+        var d = wg.sds_model;
 
-            window.mainRingCloneId = null;
-            window.mainRingViewCount = d['view_count'];
+        window.mainRingCloneId = null;
+        window.mainRingViewCount = d['view_count'];
 
-            parseSrvObj(d, function() {
-                //hideViewerLoading();
-                // limit the UI, if needed
+        parseSrvObj(d, function () {
+            //hideViewerLoading();
+            // limit the UI, if needed
 
-                if ((d['viewer'] !== undefined) && d['viewer'] && (d['viewer_name'] !== undefined)) {
-                    wizegem.user_model = true;
-                    wizegem.user_name = d['viewer_name'];
-                }
-
-                if (onSuccess != undefined) {
-                    onSuccess();
-                }
-            });
-        }
-
-        function onBootModelLoad() {
-            window.load_in_progress = true;
-            /* //createMainWindow(); */
-            GenMainArea(mainRingR);
-            //smenu_disable([]);
-            //  $("#bottom_bar").show();
-            //  $("#inout").show();
-            // $("#wg-logo").hide();
-            //hideProcessBar();
-            ViewPressedInline(boot_options.onsuccess);
-        }
-
-        function onModelLoad(id, onsuccess) {
-            if ($("#inout").is(":visible")) {
-                ViewPressed(id,onsuccess);
-                return;
+            if ((d['viewer'] !== undefined) && d['viewer'] && (d['viewer_name'] !== undefined)) {
+                wizegem.user_model = true;
+                wizegem.user_name = d['viewer_name'];
             }
 
-            //$('#selectColorMenu').is(":visible");
-            //$('#selectColorMenu').hide();
-            //$('#selectObjMenu').is(":visible");
-            //$('#selectObjMenu').hide();
-
-            window.onBootComplete = onBootModelLoad;
-
-            boot_options.id = id;
-            boot_options.onsuccess = onsuccess;
-
-            wg_bootstrap();
-        }
-
-        $(document).ready(function() {
-            var so = '2402';
-            if ((so!='')&&(Number(so)!=NaN)) {
-                onModelLoad(Number(so), function() {
-                    window.mainRingCloneId = so;
-                    FindReact(document.querySelector(".sds-workbench")).setState({loading: false });
-                    FindReact(document.querySelector(".sds-workbench"))._populate_edit_options();
-                });
+            if (onSuccess != undefined) {
+                onSuccess();
             }
         });
+    }
 
-        function changeText() {
-            var person = prompt("Please enter your name:", "Harry Potter");
+    function onBootModelLoad() {
+        window.load_in_progress = true;
+        GenMainArea(mainRingR);
+        ViewPressedInline(boot_options.onsuccess);
+    }
 
-            if (person == null || person == "") {
-
-            } else {
-                person = person.replace(" ", "");
-                person = person.toLocaleLowerCase();
-            }
-
-            scene.remove(mainRing);
-            mainRing = null;
-
-            var x = document.getElementById("refreshDiv");
-
-            x.style.display = "block";
-
-            wg.sds_model.items[0].text = person;
-
-            genJewelryObjects( wg.sds_model.items, function()
-            {
-                if (!wizegem.view_mode && !wizegem.sds)
-                    for (var e = 0; e < activeRingsObjects.length; e++)
-                        addActiveObject(activeRingsObjects[e]);
-
-                asmTargetRotationY = Math.PI / 4;
-                asmTargetRotationX = 0;
-
-                // mainRing.material.wireframe = true;
-                scene.add(mainRing);
-                activeRing = mainRing;
-                activeRingObj = mainRingObj;
-                activeRingIndex = 0;
-                mainRingSelected = false;
-                mainRingModelId = i.id;
-                mainRingModelName = i.name;
-                window.cust = i.c_edit;
-                wizegem.view_mode || showModelOptions(mainRingModelName, mainRingModelId),
-                wizegem.view_mode || wizegem.sds || (ACTIVE_SELECTED = activeRingsMarkers[0], ACTIVE_SELECTED_prev_color = activeRingsMarkers[0].material.color.getHex(),
-                    ACTIVE_SELECTED.material.color.setHex(markerSelColor))
-
-            });
-
+    function onModelLoad(id, onsuccess) {
+        if ($("#inout").is(":visible")) {
+            ViewPressed(id, onsuccess);
+            return;
         }
-    </script>
+
+        window.onBootComplete = onBootModelLoad;
+
+        boot_options.id = id;
+        boot_options.onsuccess = onsuccess;
+
+        wg_bootstrap();
+    }
+
+    $(document).ready(function () {
+        var so = '2402';
+        if ((so != '') && (Number(so) != NaN)) {
+            onModelLoad(Number(so), function () {
+                window.mainRingCloneId = so;
+            });
+        }
+    });
+
+    function changeText() {
+        var person = prompt("Please enter your name:", "Harry Potter");
+
+        if (person == null || person == "") {
+
+        } else {
+            person = person.replace(" ", "");
+            person = person.toLocaleLowerCase();
+        }
+
+        scene.remove(mainRing);
+        mainRing = null;
+
+        var x = document.getElementById("refreshDiv");
+
+        x.style.display = "block";
+
+        wg.sds_model.items[0].text = person;
+
+        genJewelryObjects(wg.sds_model.items, function () {
+            if (!wizegem.view_mode && !wizegem.sds)
+                for (var e = 0; e < activeRingsObjects.length; e++)
+                    addActiveObject(activeRingsObjects[e]);
+
+            asmTargetRotationY = Math.PI / 4;
+            asmTargetRotationX = 0;
+
+            // mainRing.material.wireframe = true;
+            scene.add(mainRing);
+            activeRing = mainRing;
+            activeRingObj = mainRingObj;
+            activeRingIndex = 0;
+            mainRingSelected = false;
+            mainRingModelId = i.id;
+            mainRingModelName = i.name;
+            window.cust = i.c_edit;
+            wizegem.view_mode || showModelOptions(mainRingModelName, mainRingModelId),
+            wizegem.view_mode || wizegem.sds || (ACTIVE_SELECTED = activeRingsMarkers[0], ACTIVE_SELECTED_prev_color = activeRingsMarkers[0].material.color.getHex(),
+                ACTIVE_SELECTED.material.color.setHex(markerSelColor))
+
+        });
+    }
+</script>
 </body>
 </html>
