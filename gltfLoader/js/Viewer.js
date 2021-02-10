@@ -2,11 +2,11 @@ const Vector3 = THREE.Vector3;
 
 let camera, scene, renderer, controls, stats;
 
-const sceneBoundingRadius = 100;
+const sceneBoundingRadius = 2000;
 
 const fov = 45;
 const near = 1;
-const far = sceneBoundingRadius * 10;
+const far = sceneBoundingRadius * 100;
 
 const initCameraPosition = new Vector3(0, sceneBoundingRadius * 2, sceneBoundingRadius * 2);
 
@@ -30,11 +30,10 @@ class Viewer {
         // camera
         camera = new THREE.PerspectiveCamera( fov, width / height, near, far );
         camera.position.copy(initCameraPosition);
-       // camera.lookAt(new Vector3(0, 0, 0))
 
         // scene
         scene = new THREE.Scene();
-        scene.background = new THREE.Color( 0x000000 );
+        scene.background = new THREE.Color( 0xffffff );
         scene.fog = new THREE.Fog( 0xcce0ff, 500, 10000 );
 
         //renderer
@@ -103,14 +102,27 @@ class Viewer {
     }
 
     _setupMyScene(){
-        // todo
+        const loader = new THREE.GLTFLoader();
 
-        const geometry = new THREE.SphereGeometry( sceneBoundingRadius / 10, 32, 32 );
-        const material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-        const sphere = new THREE.Mesh( geometry, material );
+        loader.load(
+            // resource URL
+            './data0.glb',
+            // called when the resource is loaded
+            function ( gltf ) {
+                scene.add( gltf.scene );
 
-        sphere.position.set(sceneBoundingRadius, 0, 0);
-        scene.add( sphere );
+
+            },
+            // called while loading is progressing
+            function ( xhr ) {
+                console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+            },
+            // called when loading has errors
+            function ( error ) {
+                console.log( 'An error happened' );
+            }
+        );
+
     }
 
     _initGUI(){

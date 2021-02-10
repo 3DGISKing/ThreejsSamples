@@ -94,7 +94,7 @@
 
         // model
         var loader = new THREE.GLTFLoader();
-        loader.load( 'models/untitled.gltf', function ( gltf ) {
+        loader.load( './data0.glb', function ( gltf ) {
             const scene = gltf.scene || gltf.scenes[0];
             const clips = gltf.animations || [];
 
