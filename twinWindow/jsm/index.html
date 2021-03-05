@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Twin Window</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .fullSizeLeft {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+            width: 50%;
+            height: 100%;
+        }
+        .fullSizeRight {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border: none;
+            width: 50%;
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div id = "threejsContainerLeft" class="fullSizeLeft">
+</div>
+<div id = "threejsContainerRight" class="fullSizeRight">
+</div>
+
+<input id = "left" type="button" value="Show/hide left" style="position: absolute; top: 50px; left: 10px;">
+<input id = "right" type="button" value="Show/hide right" style="position: absolute; top: 80px; left: 10px;">
+
+<script type="module">
+    import Viewer from "./Viewer.js"
+
+    new Viewer('threejsContainerLeft');
+
+    new Viewer('threejsContainerRight');
+
+    document.getElementById('left').addEventListener('click', () =>{
+        const element = document.getElementById('threejsContainerLeft');
+
+        if(element.style.display === 'block')
+            element.style.display = 'none';
+        else
+            element.style.display = 'block';
+    });
+
+    document.getElementById('right').addEventListener('click', () =>{
+        const element = document.getElementById('threejsContainerRight');
+
+        if(element.style.display === 'block')
+            element.style.display = 'none';
+        else
+            element.style.display = 'block';
+    });
+
+</script>
+
+</body>
+</html>
